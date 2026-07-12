@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journal Admin — In Between</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Caveat:wght@500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Custom Admin Interface Styles extending the shared look */
+    .admin-container {
+      max-width: 760px;
+      margin: 60px auto;
+      padding: 40px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-l);
+      box-shadow: 0 24px 48px -15px rgba(0, 0, 0, 0.4);
+      position: relative;
+      z-index: 2;
+      animation: fadeInUp .7s var(--ease) both;
+    }
+
+    .admin-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .admin-header h1 {
+      font-family: var(--font-display);
+      color: var(--ink);
+      font-size: 32px;
+      margin: 10px 0;
+    }
+
+    .admin-header p {
+      font-family: var(--font-hand);
+      font-size: 20px;
+      color: var(--terracotta);
+      margin: 0;
+    }
+
+    /* Admin Tabs Styling */
+    .admin-tabs {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 32px;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 16px;
+    }
+
+    .tab-btn {
+      font-family: var(--font-body);
+      font-size: 14.5px;
+      padding: 10px 20px;
+      background: transparent;
+      color: var(--ink-soft);
+      border: 1px solid transparent;
+      border-radius: var(--radius-s);
+      cursor: pointer;
+      transition: all 0.25s var(--ease);
+      outline: none;
+    }
+
+    .tab-btn:hover {
+      color: var(--terracotta);
+    }
+
+    .tab-btn.active {
+      background: var(--cream-deep);
+      border-color: var(--line);
+      color: var(--clay);
+      font-weight: 500;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink-soft);
+      letter-spacing: 0.02em;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    textarea,
+    select {
+      background: var(--cream-deep);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-s);
+      padding: 12px 16px;
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-size: 15px;
+      transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+      outline: none;
+      width: 100%;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--clay);
+      box-shadow: 0 0 0 3px rgba(201, 169, 110, 0.15);
+    }
+
+    .slug-preview {
+      font-size: 12px;
+      color: var(--ink-faint);
+      margin-top: 4px;
+    }
+
+    /* Custom Checkbox Group for Tags */
+    .tags-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .tag-checkbox {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--cream-deep);
+      cursor: pointer;
+      font-size: 13px;
+      color: var(--ink-soft);
+      user-select: none;
+      transition: all 0.25s var(--ease);
+      text-transform: capitalize;
+    }
+
+    .tag-checkbox input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    .tag-checkbox:hover {
+      border-color: var(--clay);
+      color: var(--terracotta);
+    }
+
+    .tag-checkbox.selected {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      color: var(--paper);
+      font-weight: 500;
+    }
+
+    /* Submit Button styling */
+    .submit-btn {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 28px;
+      background: var(--clay);
+      color: var(--paper);
+      border: none;
+      border-radius: var(--radius-s);
+      cursor: pointer;
+      transition: background 0.3s var(--ease), transform 0.2s var(--ease);
+      margin-top: 10px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .submit-btn:hover {
+      background: var(--ink);
+      transform: translateY(-2px);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Password gate styles */
+    .gate-container {
+      max-width: 420px;
+      margin: 120px auto;
+      padding: 40px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-l);
+      box-shadow: 0 24px 48px -15px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      z-index: 2;
+      position: relative;
+      animation: fadeInUp 0.7s var(--ease) both;
+    }
+
+    .gate-container h2 {
+      font-family: var(--font-display);
+      margin-bottom: 24px;
+    }
+
+    .gate-logo {
+      width: 50px;
+      height: 50px;
+      margin: 0 auto 16px;
+    }
+
+    .error-msg {
+      color: var(--terracotta);
+      font-size: 14px;
+      margin-top: 12px;
+      display: none;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--paper);
+      border-left: 4px solid var(--olive);
+      color: var(--ink);
+      padding: 16px 24px;
+      border-radius: var(--radius-s);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      z-index: 10000;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.3s var(--ease);
+      pointer-events: none;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .toast.error {
+      border-left-color: var(--terracotta);
+    }
+
+    /* Loading Spinner */
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(26,13,13, 0.3);
+      border-radius: 50%;
+      border-top-color: var(--paper);
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="particles" id="particles"></div>
+
+  <!-- Navigation -->
+  <nav class="site-nav">
+    <div class="inner">
+      <a class="logo" href="index.html">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 12 C8 6, 2 10, 2 18 C2 26, 12 34, 20 38 C28 34, 38 26, 38 18 C38 10, 32 6, 28 12"
+            stroke="#C08161" stroke-width="2" stroke-linecap="round" opacity="0.3" />
+          <path d="M 4 20 L 12 20 L 15 14 L 18 26 L 21 6 L 24 34 L 27 20 L 30 17 L 32 20 L 36 20" stroke="#8A3B34"
+            stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>In Between
+      </a>
+      <div class="nav-links">
+        <a href="index.html">back to journal</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PASSWORD GATE -->
+  <div class="gate-container" id="password-gate">
+    <div class="gate-logo">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 4 20 L 12 20 L 15 14 L 18 26 L 21 6 L 24 34 L 27 20 L 30 17 L 32 20 L 36 20" stroke="#8A3B34"
+          stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </div>
+    <h2>Unlock Journal Admin</h2>
+    <div class="form-group" style="text-align: left;">
+      <label for="gate-password">Secret Password</label>
+      <input type="password" id="gate-password" placeholder="Enter key..." autofocus>
+      <div class="error-msg" id="gate-error">That is not the correct key.</div>
+    </div>
+    <button class="submit-btn" id="gate-submit">Verify Secret</button>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div class="admin-container" id="admin-panel" style="display: none;">
+    <div class="admin-header">
+      <p>ink &amp; overthinking</p>
+      <h1>Journal Dashboard</h1>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="admin-tabs">
+      <button class="tab-btn active" id="tab-blog">Publish a Blog Post</button>
+      <button class="tab-btn" id="tab-thought">Update Thought of the Day</button>
+    </div>
+
+    <!-- FORM 1: BLOG POST FORM -->
+    <div id="blog-form-section">
+      <form id="blog-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="title">Blog Title</label>
+            <input type="text" id="title" placeholder="e.g., Sunday Morning!" required>
+          </div>
+          <div class="form-group">
+            <label for="slug">Blog Slug (URL component)</label>
+            <input type="text" id="slug" placeholder="e.g., sunday-morning" required>
+            <div class="slug-preview" id="slug-preview">Preview: index.html?slug=</div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="readTime">Read Time (minutes)</label>
+            <input type="text" id="readTime" placeholder="e.g., 3 min read" required>
+          </div>
+          <div class="form-group">
+            <label for="image">Blog Image Link (URL)</label>
+            <input type="text" id="image" placeholder="e.g., https://domain.com/pic.webp">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="excerpt">Excerpt / Short Description</label>
+          <input type="text" id="excerpt" placeholder="A short 1-2 sentence hook..." required>
+        </div>
+
+        <div class="form-group">
+          <label>Select Tags</label>
+          <div class="tags-grid">
+            <label class="tag-checkbox"><input type="checkbox" value="life">life</label>
+            <label class="tag-checkbox"><input type="checkbox" value="love">love</label>
+            <label class="tag-checkbox"><input type="checkbox" value="family">family</label>
+            <label class="tag-checkbox"><input type="checkbox" value="friendship">friendship</label>
+            <label class="tag-checkbox"><input type="checkbox" value="overthinking">overthinking</label>
+            <label class="tag-checkbox"><input type="checkbox" value="work">work</label>
+            <label class="tag-checkbox"><input type="checkbox" value="travel">travel</label>
+            <label class="tag-checkbox"><input type="checkbox" value="healing">healing</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="content">Blog Content (Supports empty line breaks for new paragraphs)</label>
+          <textarea id="content" rows="12" placeholder="Write your heart out here..." required></textarea>
+        </div>
+
+        <div class="divider" style="margin: 36px 0 24px;">also update thought (optional)</div>
+
+        <div class="form-group">
+          <label for="thought-opt">Thought of the Day</label>
+          <textarea id="thought-opt" rows="3" placeholder="This will also update the thought banner on the main page..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-btn">Publish to Journal</button>
+      </form>
+    </div>
+
+    <!-- FORM 2: THOUGHT ONLY FORM -->
+    <div id="thought-form-section" style="display: none;">
+      <form id="thought-only-form">
+        <div class="form-group">
+          <label for="thought-only">Thought of the Day</label>
+          <textarea id="thought-only" rows="4" placeholder="Write a short, cozy, or inspiring quote to display on the banner..." required></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submit-thought-btn">Update Thought of the Day</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Changes saved successfully!</div>
+
+  <script>
+    // Constants
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxxmSNXtcymV1HAxebo-QqKrJXlzmFpIrbgCUPdi5l_AhaOFYk1iDLUqjlfHBs5JtPi/exec';
+    
+    // Ambient floating particles
+    const particleHost = document.getElementById('particles');
+    const particleCount = window.innerWidth < 640 ? 10 : 18;
+    for (let i = 0; i < particleCount; i++) {
+      const s = document.createElement('span');
+      s.style.left = Math.random() * 100 + 'vw';
+      s.style.bottom = (-10 - Math.random() * 20) + 'px';
+      s.style.animationDuration = (14 + Math.random() * 12) + 's';
+      s.style.animationDelay = (Math.random() * 10) + 's';
+      particleHost.appendChild(s);
+    }
+
+    // --- Authentication Gate ---
+    const passwordGate = document.getElementById('password-gate');
+    const adminPanel = document.getElementById('admin-panel');
+    const gatePassword = document.getElementById('gate-password');
+    const gateSubmit = document.getElementById('gate-submit');
+    const gateError = document.getElementById('gate-error');
+
+    function checkAuth() {
+      if (sessionStorage.getItem('ink_admin_auth') === 'true') {
+        passwordGate.style.display = 'none';
+        adminPanel.style.display = 'block';
+      }
+    }
+
+    function verifyPassword() {
+      const pw = gatePassword.value.trim().toLowerCase();
+      if (pw === 'inksecret') {
+        sessionStorage.setItem('ink_admin_auth', 'true');
+        passwordGate.style.display = 'none';
+        adminPanel.style.display = 'block';
+      } else {
+        gateError.style.display = 'block';
+        gatePassword.value = '';
+        gatePassword.focus();
+      }
+    }
+
+    gateSubmit.addEventListener('click', verifyPassword);
+    gatePassword.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') verifyPassword();
+    });
+
+    checkAuth();
+
+    // --- Tab Switcher ---
+    const tabBlog = document.getElementById('tab-blog');
+    const tabThought = document.getElementById('tab-thought');
+    const blogFormSection = document.getElementById('blog-form-section');
+    const thoughtFormSection = document.getElementById('thought-form-section');
+
+    tabBlog.addEventListener('click', () => {
+      tabBlog.classList.add('active');
+      tabThought.classList.remove('active');
+      blogFormSection.style.display = 'block';
+      thoughtFormSection.style.display = 'none';
+    });
+
+    tabThought.addEventListener('click', () => {
+      tabThought.classList.add('active');
+      tabBlog.classList.remove('active');
+      blogFormSection.style.display = 'none';
+      thoughtFormSection.style.display = 'block';
+    });
+
+    // --- Tag Checkbox Styling Helper ---
+    const tagLabels = document.querySelectorAll('.tag-checkbox');
+    tagLabels.forEach(label => {
+      const checkbox = label.querySelector('input');
+      checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+          label.classList.add('selected');
+        } else {
+          label.classList.remove('selected');
+        }
+      });
+    });
+
+    // --- Slug Generator ---
+    const titleInput = document.getElementById('title');
+    const slugInput = document.getElementById('slug');
+    const slugPreview = document.getElementById('slug-preview');
+
+    titleInput.addEventListener('input', () => {
+      if (!slugInput.dataset.edited) {
+        const titleVal = titleInput.value;
+        const generatedSlug = titleVal
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/^-+|-+$/g, '');
+        slugInput.value = generatedSlug;
+        updateSlugPreview(generatedSlug);
+      }
+    });
+
+    slugInput.addEventListener('input', () => {
+      slugInput.dataset.edited = 'true';
+      updateSlugPreview(slugInput.value);
+    });
+
+    function updateSlugPreview(slugVal) {
+      slugPreview.textContent = `Preview link: article.html?slug=${slugVal || '...'}`;
+    }
+
+    // --- Toast Helper ---
+    const toastEl = document.getElementById('toast');
+    function showToast(message, isError = false) {
+      toastEl.textContent = message;
+      if (isError) {
+        toastEl.classList.add('error');
+      } else {
+        toastEl.classList.remove('error');
+      }
+      toastEl.classList.add('show');
+      setTimeout(() => {
+        toastEl.classList.remove('show');
+      }, 4000);
+    }
+
+    // --- Form 1: Blog Submission ---
+    const blogForm = document.getElementById('blog-form');
+    const submitBtn = document.getElementById('submit-btn');
+
+    blogForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const title = titleInput.value.trim();
+      const slug = slugInput.value.trim();
+      const readTime = document.getElementById('readTime').value.trim();
+      const image = document.getElementById('image').value.trim();
+      const excerpt = document.getElementById('excerpt').value.trim();
+      const content = document.getElementById('content').value.trim();
+      const thought = document.getElementById('thought-opt').value.trim();
+      
+      const selectedTags = Array.from(document.querySelectorAll('.tag-checkbox input:checked'))
+        .map(input => input.value);
+      
+      if (selectedTags.length === 0) {
+        showToast('Please select at least one tag/category.', true);
+        return;
+      }
+
+      const now = new Date();
+      const formattedDate = now.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
+
+      const params = new URLSearchParams();
+      params.append('password', 'inksecret');
+      params.append('slug', slug);
+      params.append('title', title);
+      params.append('excerpt', excerpt);
+      params.append('tags', selectedTags.join(', '));
+      params.append('image', image);
+      params.append('date', formattedDate);
+      params.append('author', 'Pooja Borse');
+      params.append('readTime', readTime);
+      params.append('content', content);
+      params.append('link', `article.html?slug=${slug}`);
+      params.append('thought', thought);
+
+      submitBtn.disabled = true;
+      const originalText = submitBtn.textContent;
+      submitBtn.innerHTML = `<span class="spinner"></span>Publishing...`;
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: params,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        });
+
+        const text = await response.text();
+        let result;
+        try {
+          result = JSON.parse(text);
+        } catch(err) {
+          result = { success: response.ok };
+        }
+
+        if (result.success || response.ok) {
+          showToast('Entry published successfully!');
+          blogForm.reset();
+          document.querySelectorAll('.tag-checkbox').forEach(el => el.classList.remove('selected'));
+          delete slugInput.dataset.edited;
+          updateSlugPreview('');
+        } else {
+          showToast('Error: ' + (result.error || 'Failed to publish.'), true);
+        }
+      } catch (error) {
+        console.error('Submission error:', error);
+        showToast('Publish request completed. Please check your website page shortly.', false);
+        blogForm.reset();
+        document.querySelectorAll('.tag-checkbox').forEach(el => el.classList.remove('selected'));
+        delete slugInput.dataset.edited;
+        updateSlugPreview('');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+
+    // --- Form 2: Thought-Only Submission ---
+    const thoughtOnlyForm = document.getElementById('thought-only-form');
+    const submitThoughtBtn = document.getElementById('submit-thought-btn');
+
+    thoughtOnlyForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const thoughtVal = document.getElementById('thought-only').value.trim();
+      
+      if (!thoughtVal) {
+        showToast('Please write a thought of the day.', true);
+        return;
+      }
+
+      const now = new Date();
+      const formattedDate = now.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric'
+      });
+
+      const params = new URLSearchParams();
+      params.append('password', 'inksecret');
+      // Submit empty values for blog columns, and only populate the thought
+      params.append('slug', '');
+      params.append('title', '');
+      params.append('excerpt', '');
+      params.append('tags', '');
+      params.append('image', '');
+      params.append('date', formattedDate);
+      params.append('author', '');
+      params.append('readTime', '');
+      params.append('content', '');
+      params.append('link', '');
+      params.append('thought', thoughtVal);
+
+      submitThoughtBtn.disabled = true;
+      const originalText = submitThoughtBtn.textContent;
+      submitThoughtBtn.innerHTML = `<span class="spinner"></span>Updating Thought...`;
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: params,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        });
+
+        const text = await response.text();
+        let result;
+        try {
+          result = JSON.parse(text);
+        } catch(err) {
+          result = { success: response.ok };
+        }
+
+        if (result.success || response.ok) {
+          showToast('Thought of the Day updated successfully!');
+          thoughtOnlyForm.reset();
+        } else {
+          showToast('Error: ' + (result.error || 'Failed to update thought.'), true);
+        }
+      } catch (error) {
+        console.error('Thought update error:', error);
+        showToast('Update request completed. Please check your website shortly.', false);
+        thoughtOnlyForm.reset();
+      } finally {
+        submitThoughtBtn.disabled = false;
+        submitThoughtBtn.textContent = originalText;
+      }
+    });
+  </script>
+</body>
+
+</html>

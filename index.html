@@ -87,18 +87,13 @@
 
   <nav class="site-nav">
     <div class="inner">
-      <a class="logo" href="index.html">
-        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 5 C20 15, 10 15, 10 25 C10 32, 15 35, 20 35" stroke="#8A3B34" stroke-width="2.4"
-            stroke-linecap="round" />
-          <path d="M20 5 C20 15, 30 15, 30 25 C30 32, 25 35, 20 35" stroke="#C08161" stroke-width="2.4"
-            stroke-linecap="round" />
-          <circle cx="20" cy="35" r="2.4" fill="#8A3B34" />
-        </svg>
-        In Between
-      </a>
+      <a class="logo" href="index.html"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 12 C8 6, 2 10, 2 18 C2 26, 12 34, 20 38 C28 34, 38 26, 38 18 C38 10, 32 6, 28 12"
+            stroke="#C08161" stroke-width="2" stroke-linecap="round" opacity="0.3" />
+          <path d="M 4 20 L 12 20 L 15 14 L 18 26 L 21 6 L 24 34 L 27 20 L 30 17 L 32 20 L 36 20" stroke="#8A3B34"
+            stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>In Between</a>
       <div class="nav-links">
-        <a href="#essays">essays</a>
         <a href="about.html">about</a>
       </div>
     </div>
@@ -109,7 +104,7 @@
       <div class="hero">
         <span class="eyebrow">hello, I'm Pooja —</span>
         <h1 class="hero-title">
-          <span class="ink-underline">life, thought,</span><br>
+          <span class="ink-underline">Life, Thought,</span><br>
           &amp; everything in between.
         </h1>
         <p class="lede">
@@ -117,7 +112,7 @@
           the pauses, the almosts, the quiet decisions that shape a life.
           No filters, just the thinking, mid-thought.
         </p>
-        <div class="stat-line"><span class="stat-dot"></span><span id="essay-count">18</span> little essays, written
+        <div class="stat-line"><span class="stat-dot"></span><span id="story-count">0</span> little stories, written
           since 2022</div>
       </div>
 
@@ -153,13 +148,16 @@
 
           <!-- little birds in the first square (top-left) -->
           <g class="float-page" style="animation-delay: 0.5s; animation-duration: 4.8s;">
-            <path d="M72 32 Q76 26 80 32 Q84 26 88 32" stroke="#8A3B34" stroke-width="1.6" fill="none" stroke-linecap="round" />
+            <path d="M72 32 Q76 26 80 32 Q84 26 88 32" stroke="#8A3B34" stroke-width="1.6" fill="none"
+              stroke-linecap="round" />
           </g>
           <g class="float-page" style="animation-delay: 1.8s; animation-duration: 5.2s;">
-            <path d="M96 46 Q99 41 102 46 Q105 41 108 46" stroke="#6E7F54" stroke-width="1.4" fill="none" stroke-linecap="round" />
+            <path d="M96 46 Q99 41 102 46 Q105 41 108 46" stroke="#6E7F54" stroke-width="1.4" fill="none"
+              stroke-linecap="round" />
           </g>
           <g class="float-page" style="animation-delay: 0.9s; animation-duration: 4.2s;">
-            <path d="M52 58 Q54 54 56 58 Q58 54 60 58" stroke="#C08161" stroke-width="1.3" fill="none" stroke-linecap="round" />
+            <path d="M52 58 Q54 54 56 58 Q58 54 60 58" stroke="#C08161" stroke-width="1.3" fill="none"
+              stroke-linecap="round" />
           </g>
 
           <!-- girl writing, seated by the window -->
@@ -225,8 +223,14 @@
     </div>
   </header>
 
-  <main class="wrap" id="essays">
-    <div class="divider">all essays</div>
+  <!-- Thought of the Day -->
+  <section class="thought-wrap">
+    <p class="label">thought of the day</p>
+    <p class="thought-text" id="daily-thought"></p>
+  </section>
+
+  <main class="wrap" id="stories">
+    <div class="divider">stories</div>
 
     <div class="mood-bar" id="mood-bar">
       <button class="chip active" data-tag="all">all</button>
@@ -241,464 +245,6 @@
     </div>
 
     <section class="post-list">
-      <a class="post-card featured" href="dilemma.html" data-tags="life,overthinking">
-        <span class="featured-label">start here</span>
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M30 6 C30 22, 15 24, 15 38 C15 48, 22 52, 30 55" stroke="#8A3B34" stroke-width="2.2"
-              stroke-linecap="round" />
-            <path d="M30 6 C30 22, 45 24, 45 38 C45 48, 38 52, 30 55" stroke="#C08161" stroke-width="2.2"
-              stroke-linecap="round" />
-            <circle cx="30" cy="6" r="2.6" fill="#6E7F54" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>Dilemma</h2>
-          <p class="post-excerpt">
-            Since childhood, I have always found myself standing between two choices —
-            pausing, thinking, wondering… should I go to the right or to the left?
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>Apr 1, 2026</span>
-            <span class="dot">·</span>
-            <span>3 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="machine.html" data-tags="healing,life">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M30 48 C14 36, 8 26, 14 18 C19 11, 27 13, 30 20 C33 13, 41 11, 46 18 C52 26, 46 36, 30 48 Z"
-              stroke="#8A3B34" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
-            <path d="M39 24 L42 24 L44 20 L46 28 L48 24 L50 24" stroke="#6E7F54" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>More Like a Machine</h2>
-          <p class="post-excerpt">
-            If you remove emotions from any situation, that situation feels like a mechanical
-            connection or work — and yet emotions are the only tadka that keeps you going.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>Jul 26, 2024</span>
-            <span class="dot">·</span>
-            <span>2 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="edi.html" data-tags="work">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="9" y="16" width="18" height="22" rx="2" stroke="#8A3B34" stroke-width="2" />
-            <rect x="33" y="22" width="18" height="22" rx="2" stroke="#C08161" stroke-width="2" />
-            <path d="M27 24 L33 24 M27 30 L33 30" stroke="#6E7F54" stroke-width="2" stroke-linecap="round" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>Demystifying EDI: Understanding the Basics and Benefits</h2>
-          <p class="post-excerpt">
-            Electronic Data Interchange has quietly revolutionized how businesses talk to each
-            other — a short, plain-language walk through what it is and why it matters.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>Feb 25, 2024</span>
-            <span class="dot">·</span>
-            <span>2 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="sunday-morning.html" data-tags="life,love">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M35 12 C25 12, 17 20, 17 30 C17 40, 25 48, 35 48 C28 45, 23 38, 23 30 C23 22, 28 15, 35 12 Z"
-              stroke="#8A3B34" stroke-width="2" stroke-linejoin="round" />
-            <path
-              d="M45 16 L46.5 20 L50.5 20.5 L47.5 23.2 L48.3 27.2 L45 25.1 L41.7 27.2 L42.5 23.2 L39.5 20.5 L43.5 20 Z"
-              stroke="#6E7F54" stroke-width="1.6" stroke-linejoin="round" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>Sunday Morning!</h2>
-          <p class="post-excerpt">
-            A lazy, sun-less Sunday, a song on low volume, and a wandering thought about
-            switching your own light ON and OFF for yourself, not for others.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>Feb 11, 2024</span>
-            <span class="dot">·</span>
-            <span>2 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="forever-in-my-heart.html" data-tags="healing,family">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M30 44 C16 34, 12 25, 18 19 C22 15, 28 17, 30 23 C32 17, 38 15, 42 19 C48 25, 44 34, 30 44 Z"
-              stroke="#8A3B34" stroke-width="2" stroke-linejoin="round" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>Forever in My Heart</h2>
-          <p class="post-excerpt">
-            Even a full, well-lived day can't create new moments with someone no longer here —
-            a quiet reminder that time holds more power than anything we own.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>1 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="going-with-the-flow.html" data-tags="travel,life">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 22 C16 22, 16 28, 24 28 C32 28, 32 22, 40 22 C48 22, 48 28, 52 28" stroke="#8A3B34"
-              stroke-width="2" stroke-linecap="round" />
-            <path d="M8 34 C16 34, 16 40, 24 40 C32 40, 32 34, 40 34 C44 34, 46 36, 48 38" stroke="#C08161"
-              stroke-width="2" stroke-linecap="round" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>Going with the Flow!</h2>
-          <p class="post-excerpt">
-            On a dynamic personality, a promise made over breakfast plans in different cities,
-            and a colourful sky somewhere over a flight to Pune.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>Oct 8, 2023</span>
-            <span class="dot">·</span>
-            <span>3 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="one-month-to-my-birthday.html" data-tags="life">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M30 14 C27 18, 27 21, 30 24 C33 21, 33 18, 30 14 Z" stroke="#C08161" stroke-width="1.8"
-              stroke-linejoin="round" />
-            <line x1="30" y1="24" x2="30" y2="36" stroke="#8A3B34" stroke-width="2" stroke-linecap="round" />
-            <path d="M18 46 C18 39, 24 36, 30 36 C36 36, 42 39, 42 46" stroke="#8A3B34" stroke-width="2"
-              stroke-linecap="round" />
-            <line x1="15" y1="46" x2="45" y2="46" stroke="#6E7F54" stroke-width="2" stroke-linecap="round" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>One Month to My Birthday</h2>
-          <p class="post-excerpt">
-            A 4 AM scroll, a sister's blunt honesty, and a quiet argument against measuring
-            your twenties by everyone else's highlight reel.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>Sep 4, 2023</span>
-            <span class="dot">·</span>
-            <span>2 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="moving-to-the-new-city.html" data-tags="life,travel">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M12 30 L30 15 L48 30" stroke="#8A3B34" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round" />
-            <path d="M17 27 L17 46 L43 46 L43 27" stroke="#8A3B34" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round" />
-            <path d="M24 46 L24 34 L30 34" stroke="#6E7F54" stroke-width="1.8" stroke-linecap="round" />
-            <path d="M33 34 C36 32, 39 32, 39 34 C39 36, 36 38, 33 38" stroke="#C08161" stroke-width="1.6"
-              stroke-linecap="round" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>Moving to the New City</h2>
-          <p class="post-excerpt">
-            Weather first, house-hunting second, and then the best part — turning an
-            empty flat into a home, curtain by curtain, lamp by lamp.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>Aug 14, 2023</span>
-            <span class="dot">·</span>
-            <span>2 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="collect-pictures.html" data-tags="friendship,life">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect x="10" y="17" width="40" height="28" rx="3" stroke="#8A3B34" stroke-width="2" />
-            <circle cx="30" cy="31" r="7" stroke="#C08161" stroke-width="2" />
-            <path d="M18 17 L22 12 L38 12 L42 17" stroke="#6E7F54" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>Collect Pictures</h2>
-          <p class="post-excerpt">
-            Not the photos — the moments themselves. On taking what you like from every
-            story you meet, and leaving the rest behind.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>Jul 2, 2023</span>
-            <span class="dot">·</span>
-            <span>2 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="not-right-is-not-wrong.html" data-tags="friendship">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M9 20 C9 16, 12 14, 16 14 L27 14 C31 14, 33 16, 33 20 L33 26 C33 30, 31 32, 27 32 L18 32 L12 37 L13 32 C10 31, 9 29, 9 26 Z"
-              stroke="#8A3B34" stroke-width="1.8" stroke-linejoin="round" />
-            <path
-              d="M27 24 C27 21, 29 19, 32 19 L41 19 C44 19, 46 21, 46 24 L46 29 C46 32, 44 34, 41 34 L36 34 L32 38 L33 34 C29 33, 27 31, 27 29 Z"
-              stroke="#C08161" stroke-width="1.8" stroke-linejoin="round" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>Not Right Is Not Wrong! <span
-              style="font-family:'Caveat',cursive;color:var(--ink-soft);font-size:15px;">part one</span></h2>
-          <p class="post-excerpt">
-            A long-overdue dinner date, split bills, and a quiet bus-stop conversation
-            about being right on your own side.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>Apr 28, 2023</span>
-            <span class="dot">·</span>
-            <span>3 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="under-the-same-sky.html" data-tags="family">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="30" cy="30" r="14" stroke="#8A3B34" stroke-width="2" />
-            <path d="M14 12 L16 15 M46 12 L44 15 M12 30 L16 30 M48 30 L44 30" stroke="#6E7F54" stroke-width="1.8"
-              stroke-linecap="round" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>Under the Same Sky</h2>
-          <p class="post-excerpt">
-            A full moon, a terrace walk with Bunny, and a photo from a brother abroad —
-            proof that distance isn't quite what it seems.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>Feb 8, 2023</span>
-            <span class="dot">·</span>
-            <span>2 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="roaming.html" data-tags="life">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M8 34 Q30 18, 52 34" stroke="#C08161" stroke-width="2" stroke-linecap="round" />
-            <line x1="8" y1="34" x2="52" y2="34" stroke="#8A3B34" stroke-width="2" stroke-linecap="round" />
-            <circle cx="30" cy="30" r="4" fill="#6E7F54" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>Roaming <span style="font-family:'Caveat',cursive;color:var(--ink-soft);font-size:15px;">part one</span>
-          </h2>
-          <p class="post-excerpt">
-            A terrace at 5 o'clock, an unhurried sunset, and the realization that
-            sometimes the sky is company enough.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>Oct 13, 2022</span>
-            <span class="dot">·</span>
-            <span>2 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="not-a-good-morning.html" data-tags="overthinking,healing">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="30" cy="33" r="14" stroke="#8A3B34" stroke-width="2" />
-            <path d="M30 25 L30 33 L36 37" stroke="#C08161" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round" />
-            <path d="M20 15 L24 19 M40 15 L36 19" stroke="#6E7F54" stroke-width="2" stroke-linecap="round" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>Not a Good Morning!</h2>
-          <p class="post-excerpt">
-            A restless dream, a racing heart, and an old habit of writing thoughts down,
-            ripping the paper, and letting it go.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>Sep 26, 2022</span>
-            <span class="dot">·</span>
-            <span>3 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="output-of-your-habits.html" data-tags="life">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M18 22 C18 14, 42 14, 42 22" stroke="#8A3B34" stroke-width="2" stroke-linecap="round" />
-            <path d="M42 38 C42 46, 18 46, 18 38" stroke="#C08161" stroke-width="2" stroke-linecap="round" />
-            <path d="M39 18 L42 22 L45 18" stroke="#6E7F54" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round" />
-            <path d="M21 42 L18 38 L15 42" stroke="#6E7F54" stroke-width="2" stroke-linecap="round"
-              stroke-linejoin="round" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>You Are the Output of Your Habits.</h2>
-          <p class="post-excerpt">
-            On grandmothers who remember everything, siblings who never stop playing,
-            and what it really means to build a version of yourself.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>Aug 3, 2022</span>
-            <span class="dot">·</span>
-            <span>2 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="the-bookmark.html" data-tags="friendship">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 10 L40 10 L40 50 L30 42 L20 50 Z" stroke="#8A3B34" stroke-width="2" stroke-linejoin="round" />
-            <path d="M30 20 C27 17, 22 18, 22 22 C22 26, 30 30, 30 30 C30 30, 38 26, 38 22 C38 18, 33 17, 30 20 Z"
-              stroke="#C08161" stroke-width="1.6" stroke-linejoin="round" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>The Bookmark</h2>
-          <p class="post-excerpt">
-            On giving time, moving on, and being kind — and a paper flower kept
-            safe in a diary for years, finally handed over.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>Jun 16, 2022</span>
-            <span class="dot">·</span>
-            <span>3 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="stuck-in-your-head.html" data-tags="overthinking">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M22 40 C14 36, 12 26, 18 20 C24 13, 36 13, 42 20 C48 26, 47 34, 42 38 L40 46 L24 46 Z"
-              stroke="#8A3B34" stroke-width="2" stroke-linejoin="round" />
-            <path d="M25 22 C28 19, 33 19, 34 24 C35 28, 30 29, 30 33" stroke="#6E7F54" stroke-width="1.8"
-              stroke-linecap="round" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>If It Is Stuck in Your Head&hellip;</h2>
-          <p class="post-excerpt">
-            A bus, two strangers debating the young generation, and a small case
-            for the difference between overthinking and planning.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>May 31, 2022</span>
-            <span class="dot">·</span>
-            <span>3 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="the-proposal.html" data-tags="love">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M36 16 C28 16, 22 22, 22 30 C22 38, 28 44, 36 44 C31 42, 27 37, 27 30 C27 23, 31 18, 36 16 Z"
-              stroke="#8A3B34" stroke-width="2" stroke-linejoin="round" />
-            <circle cx="30" cy="46" r="4.5" stroke="#C08161" stroke-width="1.8" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>The Proposal <span style="font-family:'Caveat',cursive;color:var(--ink-soft);font-size:15px;">Full Moon
-              series</span></h2>
-          <p class="post-excerpt">
-            A secret story he tells differently every time, a ring in a small box,
-            and a promise made under a full moon.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>May 27, 2022</span>
-            <span class="dot">·</span>
-            <span>2 min read</span>
-          </div>
-        </div>
-      </a>
-
-      <a class="post-card" href="isnt-it-boon.html" data-tags="friendship,life">
-        <div class="thumb">
-          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M30 44 L30 26" stroke="#8A3B34" stroke-width="2" stroke-linecap="round" />
-            <path d="M30 26 C24 26, 20 22, 20 16 C26 16, 30 20, 30 26 Z" stroke="#6E7F54" stroke-width="1.8"
-              stroke-linejoin="round" />
-            <path d="M30 32 C36 32, 40 28, 40 22 C34 22, 30 26, 30 32 Z" stroke="#C08161" stroke-width="1.8"
-              stroke-linejoin="round" />
-            <path d="M20 46 L40 46" stroke="#8A3B34" stroke-width="2" stroke-linecap="round" />
-          </svg>
-        </div>
-        <div class="post-body">
-          <h2>Isn't It Boon?</h2>
-          <p class="post-excerpt">
-            A slow Sunday, watering plants in the veranda, and a small collection
-            of messages from friends who just get it.
-          </p>
-          <div class="meta">
-            <span>Pooja Borse</span>
-            <span class="dot">·</span>
-            <span>May 25, 2022</span>
-            <span class="dot">·</span>
-            <span>2 min read</span>
-          </div>
-        </div>
-      </a>
-
       <div class="coming-soon">
         <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M8 30 L28 10 M28 10 L22 10 M28 10 L28 16" stroke="#6E7F54" stroke-width="2" stroke-linecap="round"
@@ -715,7 +261,10 @@
   </footer>
 
   <script>
-    const cards = document.querySelectorAll('.post-card');
+    // Constants
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxxmSNXtcymV1HAxebo-QqKrJXlzmFpIrbgCUPdi5l_AhaOFYk1iDLUqjlfHBs5JtPi/exec';
+
+    // IntersectionObserver for cards
     const io = new IntersectionObserver((entries) => {
       entries.forEach((e, i) => {
         if (e.isIntersecting) {
@@ -725,12 +274,22 @@
         }
       });
     }, { threshold: 0.15 });
-    cards.forEach(c => io.observe(c));
 
-    // essay count, computed from the actual number of cards
-    document.getElementById('essay-count').textContent = cards.length;
+    function observeCards() {
+      const cards = document.querySelectorAll('.post-card');
+      cards.forEach(c => io.observe(c));
 
-    // ambient floating particles
+      // Update story count, computed from the actual number of cards (static + dynamic)
+      const storyCountEl = document.getElementById('story-count');
+      if (storyCountEl) {
+        storyCountEl.textContent = cards.length;
+      }
+    }
+
+    // Initial observer run for static posts
+    observeCards();
+
+    // Ambient floating particles
     const particleHost = document.getElementById('particles');
     const particleCount = window.innerWidth < 640 ? 10 : 18;
     for (let i = 0; i < particleCount; i++) {
@@ -742,25 +301,202 @@
       particleHost.appendChild(s);
     }
 
-    // mood filter chips
+    // Mood filter chips (dynamic card filtering)
     const chips = document.querySelectorAll('.chip');
     chips.forEach(chip => {
       chip.addEventListener('click', () => {
         chips.forEach(c => c.classList.remove('active'));
         chip.classList.add('active');
         const tag = chip.dataset.tag;
-        cards.forEach(card => {
-          const cardTags = (card.dataset.tags || '').split(',');
+        let firstVisibleFound = false;
+        const currentCards = document.querySelectorAll('.post-card');
+        currentCards.forEach(card => {
+          const cardTags = (card.dataset.tags || '').split(',').map(t => t.trim());
           if (tag === 'all' || cardTags.includes(tag)) {
             card.classList.remove('hidden');
+            
+            // Make the first visible card rectangular (featured)
+            if (!firstVisibleFound) {
+              card.classList.add('featured');
+              firstVisibleFound = true;
+            } else {
+              card.classList.remove('featured');
+            }
           } else {
             card.classList.add('hidden');
+            card.classList.remove('featured');
           }
         });
       });
     });
+
+    // Fetch dynamic posts from Google Sheet Web App
+    async function fetchDynamicPosts() {
+      const postListContainer = document.querySelector('.post-list');
+      let hasCache = false;
+
+      // 1. Immediately load posts from cache if available for instant display
+      const cachedPostsData = localStorage.getItem('cached_posts');
+      if (cachedPostsData) {
+        try {
+          const posts = JSON.parse(cachedPostsData);
+          if (posts && posts.length > 0) {
+            renderPosts(posts);
+            hasCache = true;
+          }
+        } catch (e) {
+          console.error("Cache parse error", e);
+        }
+      }
+
+      let loadingEl = null;
+      if (!hasCache && postListContainer) {
+        const comingSoon = postListContainer.querySelector('.coming-soon');
+        if (comingSoon) comingSoon.style.display = 'none'; // Hide default placeholder during fetch
+
+        loadingEl = document.createElement('div');
+        loadingEl.className = 'loading-ink';
+        loadingEl.innerHTML = `
+          <div class="status-loader"></div>
+          <p>ink is drying for you, just wait...</p>
+        `;
+        postListContainer.appendChild(loadingEl);
+      }
+
+      try {
+        const response = await fetch(`${SCRIPT_URL}?action=posts`);
+        if (!response.ok) throw new Error('Failed to fetch posts');
+        const data = await response.json();
+
+        if (data && data.posts && data.posts.length > 0) {
+          const validPosts = data.posts.filter(post => post.slug && post.slug !== 'w');
+
+          // 2. Save the fresh posts to cache
+          localStorage.setItem('cached_posts', JSON.stringify(validPosts));
+
+          // 3. Render the fresh posts
+          renderPosts(validPosts);
+        }
+      } catch (err) {
+        console.error('Error loading dynamic posts:', err);
+      } finally {
+        if (loadingEl) loadingEl.remove();
+        if (postListContainer) {
+          const comingSoon = postListContainer.querySelector('.coming-soon');
+          if (comingSoon) comingSoon.style.display = 'block';
+        }
+      }
+    }
+
+    // Render posts helper
+    function renderPosts(posts) {
+      const postListContainer = document.querySelector('.post-list');
+      if (!postListContainer) return;
+
+      const loadingInk = postListContainer.querySelector('.loading-ink');
+      if (loadingInk) loadingInk.remove();
+
+      const comingSoon = postListContainer.querySelector('.coming-soon');
+      if (comingSoon) comingSoon.style.display = 'block'; // Show it at the bottom again
+
+      // Remove any existing post cards (but leave .coming-soon element!)
+      const existingCards = postListContainer.querySelectorAll('.post-card');
+      existingCards.forEach(card => card.remove());
+
+      // Loop through posts and prepend them so newer posts are at the top
+      posts.forEach((post, index) => {
+        const isLatest = (index === posts.length - 1);
+        const cardLink = document.createElement('a');
+        cardLink.className = isLatest ? 'post-card featured' : 'post-card';
+        cardLink.href = `article.html?slug=${encodeURIComponent(post.slug)}`;
+
+        const tagsArr = Array.isArray(post.tags) ? post.tags : (post.tags || '').split(',').map(t => t.trim()).filter(Boolean);
+        cardLink.dataset.tags = tagsArr.join(',');
+
+        let displayDate = post.date;
+        if (displayDate && displayDate.includes('T')) {
+          try {
+            const d = new Date(displayDate);
+            displayDate = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+          } catch (e) { }
+        }
+
+        const thumbnailHtml = post.image && post.image.trim() ?
+          `<img src="${post.image}" alt="${post.title}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">` :
+          `<svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 44 L30 26" stroke="#8A3B34" stroke-width="2" stroke-linecap="round" />
+            <path d="M30 26 C24 26, 20 22, 20 16 C26 16, 30 20, 30 26 Z" stroke="#6E7F54" stroke-width="1.8" stroke-linejoin="round" />
+            <path d="M30 32 C36 32, 40 28, 40 22 C34 22, 30 26, 30 32 Z" stroke="#C08161" stroke-width="1.8" stroke-linejoin="round" />
+            <path d="M20 46 L40 46" stroke="#8A3B34" stroke-width="2" stroke-linecap="round" />
+          </svg>`;
+
+        cardLink.innerHTML = `
+          ${isLatest ? `<span class="featured-label">latest story</span>` : ''}
+          <div class="thumb">
+            ${thumbnailHtml}
+          </div>
+          <div class="post-body">
+            <h2>${post.title}</h2>
+            <p class="post-excerpt">${post.excerpt}</p>
+            <div class="meta">
+              <span>${post.author || 'Pooja Borse'}</span>
+              <span class="dot">·</span>
+              <span>${displayDate}</span>
+              <span class="dot">·</span>
+              <span>${post.readTime || '3 min read'}</span>
+            </div>
+          </div>
+        `;
+
+        // Prepend new posts so they load at the top
+        postListContainer.insertBefore(cardLink, postListContainer.firstChild);
+      });
+
+      // Re-observe cards and update count
+      observeCards();
+    }
+
+    // Fetch daily thought from Google Sheets Web App
+    async function fetchDailyThought() {
+      const dailyThoughtEl = document.getElementById('daily-thought');
+
+      // 1. Instantly display last cached thought so there is no loading delay
+      const cachedThought = localStorage.getItem('cached_thought');
+      if (cachedThought && dailyThoughtEl) {
+        dailyThoughtEl.textContent = cachedThought;
+      } else if (dailyThoughtEl) {
+        dailyThoughtEl.textContent = "Thought of the day will appear here";
+      }
+
+      try {
+        const response = await fetch(`${SCRIPT_URL}?action=thought`);
+        if (!response.ok) throw new Error('Failed to fetch thought');
+        const data = await response.json();
+
+        if (data && data.thought && data.thought.trim().length > 0) {
+          // 2. Save the fresh thought to cache for the next page load
+          localStorage.setItem('cached_thought', data.thought);
+
+          // 3. Update the UI banner smoothly
+          if (dailyThoughtEl) {
+            dailyThoughtEl.textContent = data.thought;
+          }
+        }
+      } catch (err) {
+        console.error('Error fetching thought:', err);
+      }
+    }
+
+    // Load content on ready
+    window.addEventListener('DOMContentLoaded', () => {
+      fetchDynamicPosts();
+      fetchDailyThought();
+    });
   </script>
 
+
+  <!-- Screenshot & Copy Protection -->
+  <script src="security.js" defer></script>
 </body>
 
 </html>

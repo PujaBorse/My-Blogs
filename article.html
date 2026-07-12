@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reading Journal — In Between</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Caveat:wght@500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="article-style.css">
+  <style>
+    /* Premium Loading & Error States */
+    .status-container {
+      text-align: center;
+      padding: 100px 20px;
+      animation: fadeInUp 0.8s var(--ease) both;
+    }
+
+    .status-title {
+      font-family: var(--font-display);
+      font-size: 28px;
+      color: var(--ink-soft);
+      margin-bottom: 16px;
+    }
+
+    .status-subtitle {
+      font-family: var(--font-hand);
+      font-size: 20px;
+      color: var(--terracotta);
+    }
+
+    .status-loader {
+      display: inline-block;
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(232, 220, 200, 0.1);
+      border-radius: 50%;
+      border-top-color: var(--clay);
+      animation: spin 1s linear infinite;
+      margin-bottom: 24px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="particles" id="particles"></div>
+
+  <div class="bg-decor" aria-hidden="true">
+    <div class="decor decor-heart"><svg viewBox="0 0 40 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 32 C6 23, 2 14, 8 8 C12 4, 18 6, 20 12 C22 6, 28 4, 32 8 C38 14, 34 23, 20 32 Z" stroke="#8A3B34"
+          stroke-width="2" stroke-linejoin="round" />
+      </svg></div>
+    <div class="decor decor-plane"><svg viewBox="0 0 50 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 22 L46 8 L26 20 L30 34 L23 25 L11 27 Z" stroke="#6E7F54" stroke-width="1.8" stroke-linejoin="round"
+          stroke-linecap="round" />
+        <path d="M26 20 L46 8" stroke="#6E7F54" stroke-width="1.6" stroke-linecap="round" />
+      </svg></div>
+    <div class="decor decor-kite"><svg viewBox="0 0 40 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 4 L34 24 L20 44 L6 24 Z" stroke="#C08161" stroke-width="1.8" stroke-linejoin="round" />
+        <path d="M6 24 L34 24 M20 4 L20 44" stroke="#C08161" stroke-width="1.2" opacity=".7" />
+        <path d="M20 44 C22 47, 18 49, 20 52 C22 55, 18 57, 20 59" stroke="#8A3B34" stroke-width="1.4"
+          stroke-linecap="round" />
+      </svg></div>
+    <div class="decor decor-flower"><svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="4" fill="#6E7F54" />
+        <ellipse cx="20" cy="9" rx="5" ry="8" stroke="#8A3B34" stroke-width="1.6" />
+        <ellipse cx="20" cy="31" rx="5" ry="8" stroke="#8A3B34" stroke-width="1.6" />
+        <ellipse cx="9" cy="20" rx="8" ry="5" stroke="#C08161" stroke-width="1.6" />
+        <ellipse cx="31" cy="20" rx="8" ry="5" stroke="#C08161" stroke-width="1.6" />
+      </svg></div>
+    <div class="decor decor-teacup"><svg viewBox="0 0 44 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 18 L34 18 L32 30 C31.5 34, 10.5 34, 10 30 Z" stroke="#8A3B34" stroke-width="1.8"
+          stroke-linejoin="round" />
+        <path d="M34 20 C40 20, 40 28, 34 28" stroke="#8A3B34" stroke-width="1.6" />
+        <path d="M16 12 C14 9, 17 8, 16 5 M22 12 C20 9, 23 8, 22 5" stroke="#C08161" stroke-width="1.4"
+          stroke-linecap="round" />
+      </svg></div>
+  </div>
+
+  <nav class="site-nav">
+    <div class="inner">
+      <a class="logo" href="index.html">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 12 C8 6, 2 10, 2 18 C2 26, 12 34, 20 38 C28 34, 38 26, 38 18 C38 10, 32 6, 28 12"
+            stroke="#C08161" stroke-width="2" stroke-linecap="round" opacity="0.3" />
+          <path d="M 4 20 L 12 20 L 15 14 L 18 26 L 21 6 L 24 34 L 27 20 L 30 17 L 32 20 L 36 20" stroke="#8A3B34"
+            stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>In Between
+      </a>
+      <div class="nav-links">
+        <a href="about.html">about</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap article-nav">
+    <a class="back-link" href="index.html">&larr; back to stories</a>
+  </div>
+
+  <main class="wrap" id="article-container">
+    <!-- LOADING STATE -->
+    <div class="status-container" id="loading-state">
+      <div class="status-loader"></div>
+      <div class="status-title">Patience, the ink is drying...</div>
+      <div class="status-subtitle">my thoughts are on their way to you, just a moment...</div>
+    </div>
+
+    <!-- ERROR STATE -->
+    <div class="status-container" id="error-state" style="display: none;">
+      <div class="status-title">This page hasn't been written yet.</div>
+      <div class="status-subtitle">We couldn't find the entry you are looking for.</div>
+      <a href="index.html" class="back-link" style="margin-top: 32px; justify-content: center;">&larr; Return to Stories</a>
+    </div>
+
+    <!-- MAIN ARTICLE MARKUP -->
+    <article id="article-content" style="display: none;">
+      <div class="article-header">
+        <span class="tag" id="article-tag">a story on life</span>
+        <h1 id="article-title">Blog Title</h1>
+        <div class="article-meta">
+          <span class="avatar-mini">P</span>
+          <span id="article-author">Pooja Borse</span>
+          <span>·</span>
+          <span id="article-date">Date</span>
+          <span>·</span>
+          <span id="article-readtime">3 min read</span>
+        </div>
+      </div>
+
+      <div class="article-body" id="article-body">
+        <!-- Rendered paragraphs will go here -->
+      </div>
+
+      <div class="sign-off">
+        That's how I see it. What about you? — <span class="name" id="signoff-name">Pooja</span>
+      </div>
+
+      <div class="subscribe-note">
+        thank you for reading this far. more little stories like this are on their way.
+      </div>
+    </article>
+
+    <div class="article-nav" id="bottom-nav" style="padding-top:0; display: none;">
+      <a class="back-link" href="index.html">&larr; back to stories</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="stitch"></div>
+    written with ink &amp; overthinking · © 2026 Pooja Borse
+  </footer>
+
+  <script>
+    // Constants
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxxmSNXtcymV1HAxebo-QqKrJXlzmFpIrbgCUPdi5l_AhaOFYk1iDLUqjlfHBs5JtPi/exec';
+
+    // Ambient rising particles
+    const particleHost = document.getElementById('particles');
+    const particleCount = window.innerWidth < 640 ? 8 : 14;
+    for (let i = 0; i < particleCount; i++) {
+      const s = document.createElement('span');
+      s.style.left = Math.random() * 100 + 'vw';
+      s.style.bottom = (-10 - Math.random() * 20) + 'px';
+      s.style.animationDuration = (14 + Math.random() * 12) + 's';
+      s.style.animationDelay = (Math.random() * 10) + 's';
+      particleHost.appendChild(s);
+    }
+
+    // --- Dynamic Content Fetching ---
+    async function loadArticle() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const slug = urlParams.get('slug');
+
+      const loadingEl = document.getElementById('loading-state');
+      const errorEl = document.getElementById('error-state');
+      const contentEl = document.getElementById('article-content');
+      const bottomNav = document.getElementById('bottom-nav');
+
+      if (!slug) {
+        loadingEl.style.display = 'none';
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      try {
+        const response = await fetch(`${SCRIPT_URL}?action=post&slug=${encodeURIComponent(slug)}`);
+        if (!response.ok) throw new Error('Network error');
+        
+        const data = await response.json();
+        
+        if (data && data.post) {
+          const post = data.post;
+          
+          // Populate content
+          document.title = `${post.title} — In Between`;
+          
+          // Tags
+          const tagsStr = Array.isArray(post.tags) ? post.tags.join(' & ') : (post.tags || 'life');
+          document.getElementById('article-tag').textContent = `a story on ${tagsStr}`;
+          
+          // Title + Image
+          const titleEl = document.getElementById('article-title');
+          titleEl.textContent = post.title + ' ';
+          if (post.image && post.image.trim()) {
+            const img = document.createElement('img');
+            img.className = 'article-title-img';
+            img.src = post.image;
+            img.alt = post.title;
+            titleEl.appendChild(img);
+          }
+          
+          // Meta details
+          document.getElementById('article-author').textContent = post.author || 'Pooja Borse';
+          
+          // Format date if returned as ISO string
+          let displayDate = post.date;
+          if (displayDate && displayDate.includes('T')) {
+            try {
+              const d = new Date(displayDate);
+              displayDate = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+            } catch(e) {}
+          }
+          document.getElementById('article-date').textContent = displayDate || 'Recently';
+          document.getElementById('article-readtime').textContent = post.readTime || '3 min read';
+          
+          // Format body (paragraphs and blockquotes)
+          const bodyEl = document.getElementById('article-body');
+          bodyEl.innerHTML = '';
+          
+          // Split by double line breaks or carriage returns to form paragraphs
+          const textBlocks = post.content.split(/\r?\n\s*\r?\n+/);
+          
+          textBlocks.forEach(block => {
+            const trimmed = block.trim();
+            if (!trimmed) return;
+            
+            // Check if block represents a blockquote
+            if (trimmed.startsWith('>') || (trimmed.startsWith('"') && trimmed.endsWith('"') && trimmed.length > 90)) {
+              const quoteText = trimmed.replace(/^>\s*/, '').replace(/^"|"$/g, '');
+              const bq = document.createElement('blockquote');
+              bq.textContent = quoteText;
+              bodyEl.appendChild(bq);
+            } else {
+              const p = document.createElement('p');
+              // Support single-line breaks inside a paragraph
+              p.innerHTML = trimmed.replace(/\r?\n/g, '<br>');
+              bodyEl.appendChild(p);
+            }
+          });
+          
+          // Hide loading, show article content
+          loadingEl.style.display = 'none';
+          contentEl.style.display = 'block';
+          bottomNav.style.display = 'flex';
+          
+          // Initialize fade-in on scroll
+          initializeAnimations();
+        } else {
+          // Post not found
+          loadingEl.style.display = 'none';
+          errorEl.style.display = 'block';
+        }
+      } catch (err) {
+        console.error('Error fetching post:', err);
+        loadingEl.style.display = 'none';
+        errorEl.style.display = 'block';
+      }
+    }
+
+    function initializeAnimations() {
+      // paragraphs / blockquote fade up as they scroll into view
+      const els = document.querySelectorAll('.article-body > *, blockquote');
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('reveal-text');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      els.forEach(el => io.observe(el));
+    }
+
+    // Run content load
+    window.addEventListener('DOMContentLoaded', loadArticle);
+  </script>
+
+  <!-- Screenshot & Copy Protection -->
+  <script src="security.js" defer></script>
+</body>
+
+</html>
