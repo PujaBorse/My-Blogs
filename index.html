@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>In Between — Pooja Borse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Caveat:wght@500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="particles" id="particles"></div>
+
+  <div class="bg-decor" aria-hidden="true">
+
+    <div class="decor decor-balloons">
+      <svg viewBox="0 0 70 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="20" cy="18" rx="13" ry="16" stroke="#8A3B34" stroke-width="1.8" />
+        <path d="M20 34 L20 40" stroke="#8A3B34" stroke-width="1.4" />
+        <ellipse cx="45" cy="14" rx="11" ry="14" stroke="#C08161" stroke-width="1.8" />
+        <path d="M45 28 L38 42" stroke="#C08161" stroke-width="1.4" />
+        <ellipse cx="33" cy="30" rx="10" ry="13" stroke="#6E7F54" stroke-width="1.8" />
+        <path d="M33 43 L36 42" stroke="#6E7F54" stroke-width="1.4" />
+        <path d="M20 40 C22 46, 30 44, 34 44 M38 42 C36 46, 30 44, 34 44" stroke="#8A3B34" stroke-width="1.4"
+          stroke-linecap="round" />
+        <path d="M34 46 L34 66" stroke="#8A3B34" stroke-width="1.6" stroke-linecap="round" />
+        <circle cx="34" cy="76" r="9" stroke="#8A3B34" stroke-width="1.8" fill="#F5EFE3" />
+        <path d="M27 70 C27 66, 31 63, 34 63 C37 63, 41 66, 41 69" stroke="#8A3B34" stroke-width="1.6" fill="none"
+          stroke-linecap="round" />
+        <path d="M25 88 C25 82, 29 80, 34 80 C39 80, 43 82, 43 88" stroke="#C08161" stroke-width="1.8"
+          stroke-linecap="round" />
+        <path d="M21 92 L47 92" stroke="#6E7F54" stroke-width="1.8" stroke-linecap="round" />
+      </svg>
+    </div>
+
+    <div class="decor decor-heart">
+      <svg viewBox="0 0 40 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 32 C6 23, 2 14, 8 8 C12 4, 18 6, 20 12 C22 6, 28 4, 32 8 C38 14, 34 23, 20 32 Z" stroke="#8A3B34"
+          stroke-width="2" stroke-linejoin="round" />
+      </svg>
+    </div>
+
+    <div class="decor decor-plane">
+      <svg viewBox="0 0 50 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 22 L46 8 L26 20 L30 34 L23 25 L11 27 Z" stroke="#6E7F54" stroke-width="1.8" stroke-linejoin="round"
+          stroke-linecap="round" />
+        <path d="M26 20 L46 8" stroke="#6E7F54" stroke-width="1.6" stroke-linecap="round" />
+      </svg>
+    </div>
+
+    <div class="decor decor-kite">
+      <svg viewBox="0 0 40 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 4 L34 24 L20 44 L6 24 Z" stroke="#C08161" stroke-width="1.8" stroke-linejoin="round" />
+        <path d="M6 24 L34 24 M20 4 L20 44" stroke="#C08161" stroke-width="1.2" opacity=".7" />
+        <path d="M20 44 C22 47, 18 49, 20 52 C22 55, 18 57, 20 59" stroke="#8A3B34" stroke-width="1.4"
+          stroke-linecap="round" />
+      </svg>
+    </div>
+
+    <div class="decor decor-flower">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="4" fill="#6E7F54" />
+        <ellipse cx="20" cy="9" rx="5" ry="8" stroke="#8A3B34" stroke-width="1.6" />
+        <ellipse cx="20" cy="31" rx="5" ry="8" stroke="#8A3B34" stroke-width="1.6" />
+        <ellipse cx="9" cy="20" rx="8" ry="5" stroke="#C08161" stroke-width="1.6" />
+        <ellipse cx="31" cy="20" rx="8" ry="5" stroke="#C08161" stroke-width="1.6" />
+      </svg>
+    </div>
+
+    <div class="decor decor-teacup">
+      <svg viewBox="0 0 44 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 18 L34 18 L32 30 C31.5 34, 10.5 34, 10 30 Z" stroke="#8A3B34" stroke-width="1.8"
+          stroke-linejoin="round" />
+        <path d="M34 20 C40 20, 40 28, 34 28" stroke="#8A3B34" stroke-width="1.6" />
+        <path d="M16 12 C14 9, 17 8, 16 5 M22 12 C20 9, 23 8, 22 5" stroke="#C08161" stroke-width="1.4"
+          stroke-linecap="round" />
+      </svg>
+    </div>
+
+  </div>
+
+  <nav class="site-nav">
+    <div class="inner">
+      <a class="logo" href="index.html">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 5 C20 15, 10 15, 10 25 C10 32, 15 35, 20 35" stroke="#8A3B34" stroke-width="2.4"
+            stroke-linecap="round" />
+          <path d="M20 5 C20 15, 30 15, 30 25 C30 32, 25 35, 20 35" stroke="#C08161" stroke-width="2.4"
+            stroke-linecap="round" />
+          <circle cx="20" cy="35" r="2.4" fill="#8A3B34" />
+        </svg>
+        In Between
+      </a>
+      <div class="nav-links">
+        <a href="#essays">essays</a>
+        <a href="about.html">about</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="wrap" style="position:relative;">
+    <div class="hero-grid">
+      <div class="hero">
+        <span class="eyebrow">hello, I'm Pooja —</span>
+        <h1 class="hero-title">
+          <span class="ink-underline">life, thought,</span><br>
+          &amp; everything in between.
+        </h1>
+        <p class="lede">
+          This is where I write my way through the questions I can't quite answer out loud —
+          the pauses, the almosts, the quiet decisions that shape a life.
+          No filters, just the thinking, mid-thought.
+        </p>
+        <div class="stat-line"><span class="stat-dot"></span><span id="essay-count">18</span> little essays, written
+          since 2022</div>
+      </div>
+
+      <div class="hero-scene">
+        <svg viewBox="0 0 280 260" xmlns="http://www.w3.org/2000/svg">
+          <!-- sky + window -->
+          <rect x="14" y="10" width="252" height="200" rx="16" fill="#2A2420" opacity="0.04" />
+          <rect x="14" y="10" width="252" height="200" rx="16" stroke="#8A3B34" stroke-width="2" fill="none" />
+          <line x1="140" y1="10" x2="140" y2="210" stroke="#C08161" stroke-width="1.4" opacity="0.5" />
+          <line x1="14" y1="110" x2="266" y2="110" stroke="#C08161" stroke-width="1.4" opacity="0.5" />
+
+          <!-- moon -->
+          <circle class="moon-glow" cx="205" cy="65" r="30" fill="#C08161" opacity="0.18" />
+          <path
+            d="M212 42 C198 42, 187 53, 187 67 C187 81, 198 92, 212 92 C202 89, 195 79, 195 67 C195 55, 202 45, 212 42 Z"
+            stroke="#8A3B34" stroke-width="2.2" stroke-linejoin="round" fill="#F5EFE3" />
+
+          <!-- stars -->
+          <circle class="star" cx="60" cy="40" r="2" fill="#6E7F54" style="animation-delay:.2s" />
+          <circle class="star" cx="90" cy="70" r="1.6" fill="#6E7F54" style="animation-delay:1s" />
+          <circle class="star" cx="45" cy="85" r="1.8" fill="#6E7F54" style="animation-delay:1.6s" />
+          <circle class="star" cx="235" cy="120" r="1.6" fill="#6E7F54" style="animation-delay:.7s" />
+          <circle class="star" cx="150" cy="35" r="1.6" fill="#6E7F54" style="animation-delay:2s" />
+
+          <!-- little tree in the first square (top-left) -->
+          <g class="little-tree">
+            <path d="M35 110 L35 92" stroke="#8A3B34" stroke-width="2" stroke-linecap="round" />
+            <circle cx="35" cy="80" r="11" stroke="#6E7F54" stroke-width="1.8" fill="#F5EFE3" />
+            <circle cx="27" cy="84" r="8" stroke="#6E7F54" stroke-width="1.8" fill="#F5EFE3" />
+            <circle cx="43" cy="84" r="8" stroke="#6E7F54" stroke-width="1.8" fill="#F5EFE3" />
+            <path d="M35 98 L38 94 M35 95 L31 91" stroke="#8A3B34" stroke-width="1.2" stroke-linecap="round" />
+          </g>
+
+          <!-- little birds in the first square (top-left) -->
+          <g class="float-page" style="animation-delay: 0.5s; animation-duration: 4.8s;">
+            <path d="M72 32 Q76 26 80 32 Q84 26 88 32" stroke="#8A3B34" stroke-width="1.6" fill="none" stroke-linecap="round" />
+          </g>
+          <g class="float-page" style="animation-delay: 1.8s; animation-duration: 5.2s;">
+            <path d="M96 46 Q99 41 102 46 Q105 41 108 46" stroke="#6E7F54" stroke-width="1.4" fill="none" stroke-linecap="round" />
+          </g>
+          <g class="float-page" style="animation-delay: 0.9s; animation-duration: 4.2s;">
+            <path d="M52 58 Q54 54 56 58 Q58 54 60 58" stroke="#C08161" stroke-width="1.3" fill="none" stroke-linecap="round" />
+          </g>
+
+          <!-- girl writing, seated by the window -->
+          <g transform="translate(-25, 0)">
+            <path d="M75 205 C75 175, 95 168, 110 168 C125 168, 145 175, 145 205" stroke="#8A3B34" stroke-width="2.4"
+              stroke-linecap="round" stroke-linejoin="round" fill="none" />
+            <circle cx="110" cy="150" r="16" stroke="#8A3B34" stroke-width="2.4" fill="#F5EFE3" />
+            <path d="M94 145 C94 133, 100 126, 110 126 C120 126, 126 133, 126 143" stroke="#8A3B34" stroke-width="2.2"
+              fill="none" stroke-linecap="round" />
+            <path d="M90 178 C98 172, 122 172, 130 178" stroke="#C08161" stroke-width="2" stroke-linecap="round"
+              fill="none" />
+            <rect x="92" y="188" width="36" height="22" rx="3" stroke="#6E7F54" stroke-width="2" fill="#F5EFE3" />
+            <path d="M98 196 L122 196 M98 202 L116 202" stroke="#6E7F54" stroke-width="1.4" stroke-linecap="round" />
+          </g>
+
+          <!-- floating little pages of thought -->
+          <g class="float-page" style="animation-delay:0s">
+            <rect x="170" y="150" width="20" height="14" rx="2" stroke="#C08161" stroke-width="1.6" fill="#F5EFE3" />
+            <path d="M174 155 L186 155 M174 159 L182 159" stroke="#C08161" stroke-width="1.2" stroke-linecap="round" />
+          </g>
+          <g class="float-page" style="animation-delay:1.4s">
+            <rect x="200" y="175" width="18" height="13" rx="2" stroke="#8A3B34" stroke-width="1.6" fill="#F5EFE3" />
+            <path d="M204 180 L214 180 M204 184 L210 184" stroke="#8A3B34" stroke-width="1.2" stroke-linecap="round" />
+          </g>
+          <g class="float-page" style="animation-delay:2.6s">
+            <rect x="180" y="120" width="16" height="12" rx="2" stroke="#6E7F54" stroke-width="1.6" fill="#F5EFE3" />
+            <path d="M183 124 L192 124 M183 128 L189 128" stroke="#6E7F54" stroke-width="1.2" stroke-linecap="round" />
+          </g>
+
+          <!-- little bird drifting across the sky -->
+          <g class="fly-bird">
+            <path d="M0 0 C3 -3, 6 -3, 9 0 C6 -1.5, 3 -1.5, 0 0 Z" fill="#8A3B34" opacity=".55" />
+          </g>
+          <g class="fly-bird fly-bird-2">
+            <path d="M0 0 C3 -3, 6 -3, 9 0 C6 -1.5, 3 -1.5, 0 0 Z" fill="#6E7F54" opacity=".45" />
+          </g>
+
+          <!-- a girl holding balloons, standing at the window -->
+          <g class="balloon-girl">
+            <path d="M225 209 C225 199, 229 195, 235 195 C241 195, 245 199, 245 209" stroke="#8A3B34" stroke-width="2"
+              stroke-linecap="round" fill="none" />
+            <circle cx="235" cy="186" r="8.5" stroke="#8A3B34" stroke-width="2" fill="#F5EFE3" />
+            <path d="M228 182 C228 176, 231 172, 235 172 C239 172, 242 176, 242 180" stroke="#8A3B34" stroke-width="1.8"
+              fill="none" stroke-linecap="round" />
+            <path d="M231 195 L231 186" stroke="#8A3B34" stroke-width="1.4" stroke-linecap="round" />
+            <path d="M239 195 L239 186" stroke="#8A3B34" stroke-width="1.4" stroke-linecap="round" />
+
+            <g class="balloon-bob" style="animation-delay:0s">
+              <path d="M231 186 L221 165" stroke="#C08161" stroke-width="1.3" fill="none" />
+              <ellipse cx="221" cy="157" rx="6.5" ry="8" stroke="#C08161" stroke-width="1.7" fill="#F5EFE3" />
+            </g>
+            <g class="balloon-bob" style="animation-delay:.7s">
+              <path d="M235 172 L235 152" stroke="#6E7F54" stroke-width="1.3" fill="none" />
+              <ellipse cx="235" cy="144" rx="6.5" ry="8" stroke="#6E7F54" stroke-width="1.7" fill="#F5EFE3" />
+            </g>
+            <g class="balloon-bob" style="animation-delay:1.3s">
+              <path d="M239 186 L249 163" stroke="#8A3B34" stroke-width="1.3" fill="none" />
+              <ellipse cx="249" cy="155" rx="6.5" ry="8" stroke="#8A3B34" stroke-width="1.7" fill="#F5EFE3" />
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap" id="essays">
+    <div class="divider">all essays</div>
+
+    <div class="mood-bar" id="mood-bar">
+      <button class="chip active" data-tag="all">all</button>
+      <button class="chip" data-tag="life">life</button>
+      <button class="chip" data-tag="love">love</button>
+      <button class="chip" data-tag="family">family</button>
+      <button class="chip" data-tag="friendship">friendship</button>
+      <button class="chip" data-tag="overthinking">overthinking</button>
+      <button class="chip" data-tag="work">work</button>
+      <button class="chip" data-tag="travel">travel</button>
+      <button class="chip" data-tag="healing">healing</button>
+    </div>
+
+    <section class="post-list">
+      <a class="post-card featured" href="dilemma.html" data-tags="life,overthinking">
+        <span class="featured-label">start here</span>
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 6 C30 22, 15 24, 15 38 C15 48, 22 52, 30 55" stroke="#8A3B34" stroke-width="2.2"
+              stroke-linecap="round" />
+            <path d="M30 6 C30 22, 45 24, 45 38 C45 48, 38 52, 30 55" stroke="#C08161" stroke-width="2.2"
+              stroke-linecap="round" />
+            <circle cx="30" cy="6" r="2.6" fill="#6E7F54" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>Dilemma</h2>
+          <p class="post-excerpt">
+            Since childhood, I have always found myself standing between two choices —
+            pausing, thinking, wondering… should I go to the right or to the left?
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>Apr 1, 2026</span>
+            <span class="dot">·</span>
+            <span>3 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="machine.html" data-tags="healing,life">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 48 C14 36, 8 26, 14 18 C19 11, 27 13, 30 20 C33 13, 41 11, 46 18 C52 26, 46 36, 30 48 Z"
+              stroke="#8A3B34" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M39 24 L42 24 L44 20 L46 28 L48 24 L50 24" stroke="#6E7F54" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>More Like a Machine</h2>
+          <p class="post-excerpt">
+            If you remove emotions from any situation, that situation feels like a mechanical
+            connection or work — and yet emotions are the only tadka that keeps you going.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>Jul 26, 2024</span>
+            <span class="dot">·</span>
+            <span>2 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="edi.html" data-tags="work">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="9" y="16" width="18" height="22" rx="2" stroke="#8A3B34" stroke-width="2" />
+            <rect x="33" y="22" width="18" height="22" rx="2" stroke="#C08161" stroke-width="2" />
+            <path d="M27 24 L33 24 M27 30 L33 30" stroke="#6E7F54" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>Demystifying EDI: Understanding the Basics and Benefits</h2>
+          <p class="post-excerpt">
+            Electronic Data Interchange has quietly revolutionized how businesses talk to each
+            other — a short, plain-language walk through what it is and why it matters.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>Feb 25, 2024</span>
+            <span class="dot">·</span>
+            <span>2 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="sunday-morning.html" data-tags="life,love">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M35 12 C25 12, 17 20, 17 30 C17 40, 25 48, 35 48 C28 45, 23 38, 23 30 C23 22, 28 15, 35 12 Z"
+              stroke="#8A3B34" stroke-width="2" stroke-linejoin="round" />
+            <path
+              d="M45 16 L46.5 20 L50.5 20.5 L47.5 23.2 L48.3 27.2 L45 25.1 L41.7 27.2 L42.5 23.2 L39.5 20.5 L43.5 20 Z"
+              stroke="#6E7F54" stroke-width="1.6" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>Sunday Morning!</h2>
+          <p class="post-excerpt">
+            A lazy, sun-less Sunday, a song on low volume, and a wandering thought about
+            switching your own light ON and OFF for yourself, not for others.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>Feb 11, 2024</span>
+            <span class="dot">·</span>
+            <span>2 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="forever-in-my-heart.html" data-tags="healing,family">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 44 C16 34, 12 25, 18 19 C22 15, 28 17, 30 23 C32 17, 38 15, 42 19 C48 25, 44 34, 30 44 Z"
+              stroke="#8A3B34" stroke-width="2" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>Forever in My Heart</h2>
+          <p class="post-excerpt">
+            Even a full, well-lived day can't create new moments with someone no longer here —
+            a quiet reminder that time holds more power than anything we own.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>1 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="going-with-the-flow.html" data-tags="travel,life">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 22 C16 22, 16 28, 24 28 C32 28, 32 22, 40 22 C48 22, 48 28, 52 28" stroke="#8A3B34"
+              stroke-width="2" stroke-linecap="round" />
+            <path d="M8 34 C16 34, 16 40, 24 40 C32 40, 32 34, 40 34 C44 34, 46 36, 48 38" stroke="#C08161"
+              stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>Going with the Flow!</h2>
+          <p class="post-excerpt">
+            On a dynamic personality, a promise made over breakfast plans in different cities,
+            and a colourful sky somewhere over a flight to Pune.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>Oct 8, 2023</span>
+            <span class="dot">·</span>
+            <span>3 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="one-month-to-my-birthday.html" data-tags="life">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 14 C27 18, 27 21, 30 24 C33 21, 33 18, 30 14 Z" stroke="#C08161" stroke-width="1.8"
+              stroke-linejoin="round" />
+            <line x1="30" y1="24" x2="30" y2="36" stroke="#8A3B34" stroke-width="2" stroke-linecap="round" />
+            <path d="M18 46 C18 39, 24 36, 30 36 C36 36, 42 39, 42 46" stroke="#8A3B34" stroke-width="2"
+              stroke-linecap="round" />
+            <line x1="15" y1="46" x2="45" y2="46" stroke="#6E7F54" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>One Month to My Birthday</h2>
+          <p class="post-excerpt">
+            A 4 AM scroll, a sister's blunt honesty, and a quiet argument against measuring
+            your twenties by everyone else's highlight reel.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>Sep 4, 2023</span>
+            <span class="dot">·</span>
+            <span>2 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="moving-to-the-new-city.html" data-tags="life,travel">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 30 L30 15 L48 30" stroke="#8A3B34" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M17 27 L17 46 L43 46 L43 27" stroke="#8A3B34" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M24 46 L24 34 L30 34" stroke="#6E7F54" stroke-width="1.8" stroke-linecap="round" />
+            <path d="M33 34 C36 32, 39 32, 39 34 C39 36, 36 38, 33 38" stroke="#C08161" stroke-width="1.6"
+              stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>Moving to the New City</h2>
+          <p class="post-excerpt">
+            Weather first, house-hunting second, and then the best part — turning an
+            empty flat into a home, curtain by curtain, lamp by lamp.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>Aug 14, 2023</span>
+            <span class="dot">·</span>
+            <span>2 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="collect-pictures.html" data-tags="friendship,life">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="17" width="40" height="28" rx="3" stroke="#8A3B34" stroke-width="2" />
+            <circle cx="30" cy="31" r="7" stroke="#C08161" stroke-width="2" />
+            <path d="M18 17 L22 12 L38 12 L42 17" stroke="#6E7F54" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>Collect Pictures</h2>
+          <p class="post-excerpt">
+            Not the photos — the moments themselves. On taking what you like from every
+            story you meet, and leaving the rest behind.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>Jul 2, 2023</span>
+            <span class="dot">·</span>
+            <span>2 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="not-right-is-not-wrong.html" data-tags="friendship">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M9 20 C9 16, 12 14, 16 14 L27 14 C31 14, 33 16, 33 20 L33 26 C33 30, 31 32, 27 32 L18 32 L12 37 L13 32 C10 31, 9 29, 9 26 Z"
+              stroke="#8A3B34" stroke-width="1.8" stroke-linejoin="round" />
+            <path
+              d="M27 24 C27 21, 29 19, 32 19 L41 19 C44 19, 46 21, 46 24 L46 29 C46 32, 44 34, 41 34 L36 34 L32 38 L33 34 C29 33, 27 31, 27 29 Z"
+              stroke="#C08161" stroke-width="1.8" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>Not Right Is Not Wrong! <span
+              style="font-family:'Caveat',cursive;color:var(--ink-soft);font-size:15px;">part one</span></h2>
+          <p class="post-excerpt">
+            A long-overdue dinner date, split bills, and a quiet bus-stop conversation
+            about being right on your own side.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>Apr 28, 2023</span>
+            <span class="dot">·</span>
+            <span>3 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="under-the-same-sky.html" data-tags="family">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="30" cy="30" r="14" stroke="#8A3B34" stroke-width="2" />
+            <path d="M14 12 L16 15 M46 12 L44 15 M12 30 L16 30 M48 30 L44 30" stroke="#6E7F54" stroke-width="1.8"
+              stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>Under the Same Sky</h2>
+          <p class="post-excerpt">
+            A full moon, a terrace walk with Bunny, and a photo from a brother abroad —
+            proof that distance isn't quite what it seems.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>Feb 8, 2023</span>
+            <span class="dot">·</span>
+            <span>2 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="roaming.html" data-tags="life">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 34 Q30 18, 52 34" stroke="#C08161" stroke-width="2" stroke-linecap="round" />
+            <line x1="8" y1="34" x2="52" y2="34" stroke="#8A3B34" stroke-width="2" stroke-linecap="round" />
+            <circle cx="30" cy="30" r="4" fill="#6E7F54" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>Roaming <span style="font-family:'Caveat',cursive;color:var(--ink-soft);font-size:15px;">part one</span>
+          </h2>
+          <p class="post-excerpt">
+            A terrace at 5 o'clock, an unhurried sunset, and the realization that
+            sometimes the sky is company enough.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>Oct 13, 2022</span>
+            <span class="dot">·</span>
+            <span>2 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="not-a-good-morning.html" data-tags="overthinking,healing">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="30" cy="33" r="14" stroke="#8A3B34" stroke-width="2" />
+            <path d="M30 25 L30 33 L36 37" stroke="#C08161" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M20 15 L24 19 M40 15 L36 19" stroke="#6E7F54" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>Not a Good Morning!</h2>
+          <p class="post-excerpt">
+            A restless dream, a racing heart, and an old habit of writing thoughts down,
+            ripping the paper, and letting it go.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>Sep 26, 2022</span>
+            <span class="dot">·</span>
+            <span>3 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="output-of-your-habits.html" data-tags="life">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 22 C18 14, 42 14, 42 22" stroke="#8A3B34" stroke-width="2" stroke-linecap="round" />
+            <path d="M42 38 C42 46, 18 46, 18 38" stroke="#C08161" stroke-width="2" stroke-linecap="round" />
+            <path d="M39 18 L42 22 L45 18" stroke="#6E7F54" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <path d="M21 42 L18 38 L15 42" stroke="#6E7F54" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>You Are the Output of Your Habits.</h2>
+          <p class="post-excerpt">
+            On grandmothers who remember everything, siblings who never stop playing,
+            and what it really means to build a version of yourself.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>Aug 3, 2022</span>
+            <span class="dot">·</span>
+            <span>2 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="the-bookmark.html" data-tags="friendship">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 10 L40 10 L40 50 L30 42 L20 50 Z" stroke="#8A3B34" stroke-width="2" stroke-linejoin="round" />
+            <path d="M30 20 C27 17, 22 18, 22 22 C22 26, 30 30, 30 30 C30 30, 38 26, 38 22 C38 18, 33 17, 30 20 Z"
+              stroke="#C08161" stroke-width="1.6" stroke-linejoin="round" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>The Bookmark</h2>
+          <p class="post-excerpt">
+            On giving time, moving on, and being kind — and a paper flower kept
+            safe in a diary for years, finally handed over.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>Jun 16, 2022</span>
+            <span class="dot">·</span>
+            <span>3 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="stuck-in-your-head.html" data-tags="overthinking">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22 40 C14 36, 12 26, 18 20 C24 13, 36 13, 42 20 C48 26, 47 34, 42 38 L40 46 L24 46 Z"
+              stroke="#8A3B34" stroke-width="2" stroke-linejoin="round" />
+            <path d="M25 22 C28 19, 33 19, 34 24 C35 28, 30 29, 30 33" stroke="#6E7F54" stroke-width="1.8"
+              stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>If It Is Stuck in Your Head&hellip;</h2>
+          <p class="post-excerpt">
+            A bus, two strangers debating the young generation, and a small case
+            for the difference between overthinking and planning.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>May 31, 2022</span>
+            <span class="dot">·</span>
+            <span>3 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="the-proposal.html" data-tags="love">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M36 16 C28 16, 22 22, 22 30 C22 38, 28 44, 36 44 C31 42, 27 37, 27 30 C27 23, 31 18, 36 16 Z"
+              stroke="#8A3B34" stroke-width="2" stroke-linejoin="round" />
+            <circle cx="30" cy="46" r="4.5" stroke="#C08161" stroke-width="1.8" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>The Proposal <span style="font-family:'Caveat',cursive;color:var(--ink-soft);font-size:15px;">Full Moon
+              series</span></h2>
+          <p class="post-excerpt">
+            A secret story he tells differently every time, a ring in a small box,
+            and a promise made under a full moon.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>May 27, 2022</span>
+            <span class="dot">·</span>
+            <span>2 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="post-card" href="isnt-it-boon.html" data-tags="friendship,life">
+        <div class="thumb">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 44 L30 26" stroke="#8A3B34" stroke-width="2" stroke-linecap="round" />
+            <path d="M30 26 C24 26, 20 22, 20 16 C26 16, 30 20, 30 26 Z" stroke="#6E7F54" stroke-width="1.8"
+              stroke-linejoin="round" />
+            <path d="M30 32 C36 32, 40 28, 40 22 C34 22, 30 26, 30 32 Z" stroke="#C08161" stroke-width="1.8"
+              stroke-linejoin="round" />
+            <path d="M20 46 L40 46" stroke="#8A3B34" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="post-body">
+          <h2>Isn't It Boon?</h2>
+          <p class="post-excerpt">
+            A slow Sunday, watering plants in the veranda, and a small collection
+            of messages from friends who just get it.
+          </p>
+          <div class="meta">
+            <span>Pooja Borse</span>
+            <span class="dot">·</span>
+            <span>May 25, 2022</span>
+            <span class="dot">·</span>
+            <span>2 min read</span>
+          </div>
+        </div>
+      </a>
+
+      <div class="coming-soon">
+        <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 30 L28 10 M28 10 L22 10 M28 10 L28 16" stroke="#6E7F54" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        more thoughts are being written as we speak...
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="stitch"></div>
+    written with ink &amp; overthinking · © 2026 Pooja Borse
+  </footer>
+
+  <script>
+    const cards = document.querySelectorAll('.post-card');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          e.target.style.animationDelay = (i * 0.08) + 's';
+          e.target.classList.add('reveal');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    cards.forEach(c => io.observe(c));
+
+    // essay count, computed from the actual number of cards
+    document.getElementById('essay-count').textContent = cards.length;
+
+    // ambient floating particles
+    const particleHost = document.getElementById('particles');
+    const particleCount = window.innerWidth < 640 ? 10 : 18;
+    for (let i = 0; i < particleCount; i++) {
+      const s = document.createElement('span');
+      s.style.left = Math.random() * 100 + 'vw';
+      s.style.bottom = (-10 - Math.random() * 20) + 'px';
+      s.style.animationDuration = (14 + Math.random() * 12) + 's';
+      s.style.animationDelay = (Math.random() * 10) + 's';
+      particleHost.appendChild(s);
+    }
+
+    // mood filter chips
+    const chips = document.querySelectorAll('.chip');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const tag = chip.dataset.tag;
+        cards.forEach(card => {
+          const cardTags = (card.dataset.tags || '').split(',');
+          if (tag === 'all' || cardTags.includes(tag)) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>
