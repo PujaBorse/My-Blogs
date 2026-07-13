@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Caveat:wght@500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Nunito:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -262,7 +262,7 @@
 
   <script>
     // Constants
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxxmSNXtcymV1HAxebo-QqKrJXlzmFpIrbgCUPdi5l_AhaOFYk1iDLUqjlfHBs5JtPi/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx_Mh_3cVBgHfpdWFnYm2dVnpY307-7Rqnz6a1Any5BruWkwaD-mL5ah-quCNz_RdHm/exec';
 
     // IntersectionObserver for cards
     const io = new IntersectionObserver((entries) => {
@@ -335,47 +335,68 @@
       const postListContainer = document.querySelector('.post-list');
       let hasCache = false;
 
-      // 1. Immediately load posts from cache if available for instant display
+      // 1. Instantly render from cache (likes shown as '…' — will be patched)
       const cachedPostsData = localStorage.getItem('cached_posts');
       if (cachedPostsData) {
         try {
           const posts = JSON.parse(cachedPostsData);
           if (posts && posts.length > 0) {
-            renderPosts(posts);
+            renderPosts(posts.map(p => ({ ...p, likes: '…' })));
             hasCache = true;
           }
         } catch (e) {
-          console.error("Cache parse error", e);
+          console.error('Cache parse error', e);
         }
       }
 
       let loadingEl = null;
       if (!hasCache && postListContainer) {
         const comingSoon = postListContainer.querySelector('.coming-soon');
-        if (comingSoon) comingSoon.style.display = 'none'; // Hide default placeholder during fetch
-
+        if (comingSoon) comingSoon.style.display = 'none';
         loadingEl = document.createElement('div');
         loadingEl.className = 'loading-ink';
-        loadingEl.innerHTML = `
-          <div class="status-loader"></div>
-          <p>ink is drying for you, just wait...</p>
-        `;
+        loadingEl.innerHTML = `<div class="status-loader"></div><p>ink is drying for you, just wait...</p>`;
         postListContainer.appendChild(loadingEl);
       }
 
       try {
-        const response = await fetch(`${SCRIPT_URL}?action=posts`);
-        if (!response.ok) throw new Error('Failed to fetch posts');
-        const data = await response.json();
+        const t = Date.now();
 
-        if (data && data.posts && data.posts.length > 0) {
-          const validPosts = data.posts.filter(post => post.slug && post.slug !== 'w');
+        // 2. Fetch posts and all likes in parallel
+        const [postsRes, likesRes] = await Promise.all([
+          fetch(`${SCRIPT_URL}?action=posts&t=${t}`),
+          fetch(`${SCRIPT_URL}?action=get_all_likes&t=${t}`)
+        ]);
 
-          // 2. Save the fresh posts to cache
-          localStorage.setItem('cached_posts', JSON.stringify(validPosts));
+        const postsData = postsRes.ok ? await postsRes.json() : null;
+        const likesData = likesRes.ok ? await likesRes.json() : null;
 
-          // 3. Render the fresh posts
-          renderPosts(validPosts);
+        // Build a slug → likes map from the dedicated endpoint
+        const likesMap = (likesData && likesData.likes) ? likesData.likes : {};
+
+        if (postsData && postsData.posts && postsData.posts.length > 0) {
+          const validPosts = postsData.posts
+            .filter(post => post.slug && post.slug !== 'w')
+            .map(post => ({
+              ...post,
+              // Always use likesMap for accurate count — ignore what posts action returns
+              likes: likesMap[post.slug.trim()] || 0
+            }));
+
+          // Cache posts (without likes — to avoid stale likes on next load)
+          localStorage.setItem('cached_posts', JSON.stringify(validPosts.map(p => ({ ...p, likes: 0 }))));
+
+          if (hasCache) {
+            // Patch only the likes in the already-visible cards (no flicker)
+            patchLikesInDOM(validPosts);
+          } else {
+            renderPosts(validPosts);
+          }
+        } else if (hasCache && Object.keys(likesMap).length > 0) {
+          // Posts fetch failed but we have cache + fresh likes — just patch likes
+          const cachedForPatch = JSON.parse(cachedPostsData || '[]')
+            .map(p => ({ ...p, likes: likesMap[p.slug.trim()] || 0 }));
+          patchLikesInDOM(cachedForPatch);
         }
       } catch (err) {
         console.error('Error loading dynamic posts:', err);
@@ -444,6 +465,13 @@
               <span>${displayDate}</span>
               <span class="dot">·</span>
               <span>${post.readTime || '3 min read'}</span>
+              <span class="dot">·</span>
+              <span class="likes-preview" style="color: var(--terracotta); display: inline-flex; align-items: center; gap: 4px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+                ${post.likes || 0}
+              </span>
             </div>
           </div>
         `;
@@ -454,6 +482,29 @@
 
       // Re-observe cards and update count
       observeCards();
+    }
+
+    // Patch only the likes count on already-rendered cards (avoids full re-render)
+    function patchLikesInDOM(posts) {
+      const cards = document.querySelectorAll('.post-card');
+      cards.forEach(card => {
+        const href = card.getAttribute('href') || '';
+        const slugMatch = href.match(/[?&]slug=([^&]+)/);
+        if (!slugMatch) return;
+        const cardSlug = decodeURIComponent(slugMatch[1]);
+        const matchingPost = posts.find(p => p.slug === cardSlug);
+        if (!matchingPost) return;
+        const likesEl = card.querySelector('.likes-preview');
+        if (likesEl) {
+          // Keep the heart SVG, just update the text node after it
+          const svg = likesEl.querySelector('svg');
+          // Remove old text nodes
+          Array.from(likesEl.childNodes).forEach(n => {
+            if (n.nodeType === Node.TEXT_NODE) n.remove();
+          });
+          likesEl.appendChild(document.createTextNode(' ' + (matchingPost.likes || 0)));
+        }
+      });
     }
 
     // Fetch daily thought from Google Sheets Web App
@@ -469,7 +520,8 @@
       }
 
       try {
-        const response = await fetch(`${SCRIPT_URL}?action=thought`);
+        const cacheBuster = Date.now();
+        const response = await fetch(`${SCRIPT_URL}?action=thought&t=${cacheBuster}`);
         if (!response.ok) throw new Error('Failed to fetch thought');
         const data = await response.json();
 

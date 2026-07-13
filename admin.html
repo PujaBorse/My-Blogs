@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Caveat:wght@500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Nunito:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
@@ -339,6 +339,7 @@
     <!-- Navigation Tabs -->
     <div class="admin-tabs">
       <button class="tab-btn active" id="tab-blog">Publish a Blog Post</button>
+      <button class="tab-btn" id="tab-manage">Manage Posts</button>
       <button class="tab-btn" id="tab-thought">Update Thought of the Day</button>
     </div>
 
@@ -403,7 +404,65 @@
       </form>
     </div>
 
-    <!-- FORM 2: THOUGHT ONLY FORM -->
+    <!-- FORM 2: MANAGE POSTS -->
+    <div id="manage-form-section" style="display: none;">
+      <div class="form-group">
+        <label for="manage-select">Select a Post to Edit or Delete</label>
+        <select id="manage-select">
+          <option value="">Loading posts...</option>
+        </select>
+      </div>
+
+      <form id="manage-form" style="display: none;">
+        <input type="hidden" id="m-slug">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="m-title">Blog Title</label>
+            <input type="text" id="m-title" required>
+          </div>
+          <div class="form-group">
+            <label for="m-readTime">Read Time (minutes)</label>
+            <input type="text" id="m-readTime" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="m-image">Blog Image Link (URL)</label>
+          <input type="text" id="m-image">
+        </div>
+
+        <div class="form-group">
+          <label for="m-excerpt">Excerpt / Short Description</label>
+          <input type="text" id="m-excerpt" required>
+        </div>
+
+        <div class="form-group">
+          <label>Select Tags</label>
+          <div class="tags-grid" id="m-tags-container">
+            <label class="tag-checkbox"><input type="checkbox" value="life">life</label>
+            <label class="tag-checkbox"><input type="checkbox" value="love">love</label>
+            <label class="tag-checkbox"><input type="checkbox" value="family">family</label>
+            <label class="tag-checkbox"><input type="checkbox" value="friendship">friendship</label>
+            <label class="tag-checkbox"><input type="checkbox" value="overthinking">overthinking</label>
+            <label class="tag-checkbox"><input type="checkbox" value="work">work</label>
+            <label class="tag-checkbox"><input type="checkbox" value="travel">travel</label>
+            <label class="tag-checkbox"><input type="checkbox" value="healing">healing</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="m-content">Blog Content</label>
+          <textarea id="m-content" rows="12" required></textarea>
+        </div>
+
+        <div class="form-row" style="margin-top: 24px;">
+          <button type="submit" class="submit-btn" id="m-update-btn">Update Post</button>
+          <button type="button" class="submit-btn" id="m-delete-btn" style="background: var(--terracotta);">Delete Post</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- FORM 3: THOUGHT ONLY FORM -->
     <div id="thought-form-section" style="display: none;">
       <form id="thought-only-form">
         <div class="form-group">
@@ -420,7 +479,7 @@
 
   <script>
     // Constants
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxxmSNXtcymV1HAxebo-QqKrJXlzmFpIrbgCUPdi5l_AhaOFYk1iDLUqjlfHBs5JtPi/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx_Mh_3cVBgHfpdWFnYm2dVnpY307-7Rqnz6a1Any5BruWkwaD-mL5ah-quCNz_RdHm/exec';
     
     // Ambient floating particles
     const particleHost = document.getElementById('particles');
@@ -471,21 +530,37 @@
     // --- Tab Switcher ---
     const tabBlog = document.getElementById('tab-blog');
     const tabThought = document.getElementById('tab-thought');
+    const tabManage = document.getElementById('tab-manage');
     const blogFormSection = document.getElementById('blog-form-section');
     const thoughtFormSection = document.getElementById('thought-form-section');
+    const manageFormSection = document.getElementById('manage-form-section');
 
     tabBlog.addEventListener('click', () => {
       tabBlog.classList.add('active');
       tabThought.classList.remove('active');
+      tabManage.classList.remove('active');
       blogFormSection.style.display = 'block';
       thoughtFormSection.style.display = 'none';
+      manageFormSection.style.display = 'none';
     });
 
     tabThought.addEventListener('click', () => {
       tabThought.classList.add('active');
       tabBlog.classList.remove('active');
+      tabManage.classList.remove('active');
       blogFormSection.style.display = 'none';
       thoughtFormSection.style.display = 'block';
+      manageFormSection.style.display = 'none';
+    });
+
+    tabManage.addEventListener('click', () => {
+      tabManage.classList.add('active');
+      tabBlog.classList.remove('active');
+      tabThought.classList.remove('active');
+      blogFormSection.style.display = 'none';
+      thoughtFormSection.style.display = 'none';
+      manageFormSection.style.display = 'block';
+      loadPostsForManagement();
     });
 
     // --- Tag Checkbox Styling Helper ---
@@ -699,6 +774,178 @@
       } finally {
         submitThoughtBtn.disabled = false;
         submitThoughtBtn.textContent = originalText;
+      }
+    });
+
+    // --- Form 3: Manage Posts (Update / Delete) ---
+    const manageSelect = document.getElementById('manage-select');
+    const manageForm = document.getElementById('manage-form');
+    const mSlug = document.getElementById('m-slug');
+    const mTitle = document.getElementById('m-title');
+    const mReadTime = document.getElementById('m-readTime');
+    const mImage = document.getElementById('m-image');
+    const mExcerpt = document.getElementById('m-excerpt');
+    const mContent = document.getElementById('m-content');
+    const mUpdateBtn = document.getElementById('m-update-btn');
+    const mDeleteBtn = document.getElementById('m-delete-btn');
+    
+    let allFetchedPosts = [];
+
+    async function loadPostsForManagement() {
+      manageSelect.innerHTML = '<option value="">Loading posts...</option>';
+      manageForm.style.display = 'none';
+      try {
+        const response = await fetch(`${SCRIPT_URL}?action=posts`);
+        const data = await response.json();
+        if (data && data.posts) {
+          allFetchedPosts = data.posts.filter(p => p.slug && p.slug !== 'w');
+          
+          if (allFetchedPosts.length === 0) {
+            manageSelect.innerHTML = '<option value="">No posts found</option>';
+            return;
+          }
+
+          manageSelect.innerHTML = '<option value="">-- Select a post to manage --</option>';
+          allFetchedPosts.forEach(post => {
+            const opt = document.createElement('option');
+            opt.value = post.slug;
+            opt.textContent = post.title;
+            manageSelect.appendChild(opt);
+          });
+        } else {
+          manageSelect.innerHTML = '<option value="">Error loading posts</option>';
+        }
+      } catch (err) {
+        console.error(err);
+        manageSelect.innerHTML = '<option value="">Error loading posts</option>';
+      }
+    }
+
+    manageSelect.addEventListener('change', (e) => {
+      const slug = e.target.value;
+      if (!slug) {
+        manageForm.style.display = 'none';
+        return;
+      }
+      
+      const post = allFetchedPosts.find(p => p.slug === slug);
+      if (post) {
+        mSlug.value = post.slug;
+        mTitle.value = post.title;
+        mReadTime.value = post.readTime || '';
+        mImage.value = post.image || '';
+        mExcerpt.value = post.excerpt || '';
+        mContent.value = post.content || '';
+        
+        // Handle tags
+        const postTags = Array.isArray(post.tags) ? post.tags : (post.tags || '').split(',').map(t => t.trim());
+        document.querySelectorAll('#m-tags-container .tag-checkbox').forEach(label => {
+          const cb = label.querySelector('input');
+          if (postTags.includes(cb.value)) {
+            cb.checked = true;
+            label.classList.add('selected');
+          } else {
+            cb.checked = false;
+            label.classList.remove('selected');
+          }
+        });
+        
+        manageForm.style.display = 'block';
+      }
+    });
+
+    manageForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const selectedTags = Array.from(document.querySelectorAll('#m-tags-container .tag-checkbox input:checked'))
+        .map(input => input.value);
+      
+      if (selectedTags.length === 0) {
+        showToast('Please select at least one tag/category.', true);
+        return;
+      }
+      
+      const params = new URLSearchParams();
+      params.append('password', 'inksecret');
+      params.append('action', 'update');
+      params.append('slug', mSlug.value);
+      params.append('title', mTitle.value.trim());
+      params.append('excerpt', mExcerpt.value.trim());
+      params.append('tags', selectedTags.join(', '));
+      params.append('image', mImage.value.trim());
+      params.append('readTime', mReadTime.value.trim());
+      params.append('content', mContent.value.trim());
+
+      mUpdateBtn.disabled = true;
+      const originalText = mUpdateBtn.textContent;
+      mUpdateBtn.innerHTML = `<span class="spinner"></span>Updating...`;
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: params,
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        });
+        const text = await response.text();
+        let result;
+        try {
+          result = JSON.parse(text);
+        } catch(err) {
+          result = { success: response.ok };
+        }
+        
+        if (result.success || response.ok) {
+          showToast('Post updated successfully!');
+          loadPostsForManagement(); // Reload list
+        } else {
+          showToast('Error: ' + (result.error || 'Failed to update.'), true);
+        }
+      } catch (err) {
+        showToast('Update completed. Please verify.', false);
+      } finally {
+        mUpdateBtn.disabled = false;
+        mUpdateBtn.textContent = originalText;
+      }
+    });
+
+    mDeleteBtn.addEventListener('click', async () => {
+      if (!confirm('Are you sure you want to permanently delete this post?')) return;
+      
+      const params = new URLSearchParams();
+      params.append('password', 'inksecret');
+      params.append('action', 'delete');
+      params.append('slug', mSlug.value);
+
+      mDeleteBtn.disabled = true;
+      const originalText = mDeleteBtn.textContent;
+      mDeleteBtn.innerHTML = `<span class="spinner"></span>Deleting...`;
+
+      try {
+        const response = await fetch(SCRIPT_URL, {
+          method: 'POST',
+          body: params,
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        });
+        const text = await response.text();
+        let result;
+        try {
+          result = JSON.parse(text);
+        } catch(err) {
+          result = { success: response.ok };
+        }
+        
+        if (result.success || response.ok) {
+          showToast('Post deleted successfully!');
+          manageForm.style.display = 'none';
+          loadPostsForManagement(); // Reload list
+        } else {
+          showToast('Error: ' + (result.error || 'Failed to delete.'), true);
+        }
+      } catch (err) {
+        showToast('Delete completed. Please verify.', false);
+      } finally {
+        mDeleteBtn.disabled = false;
+        mDeleteBtn.textContent = originalText;
       }
     });
   </script>
