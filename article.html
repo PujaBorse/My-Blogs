@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Caveat:wght@500;600;700&family=Work+Sans:wght@300;400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Nunito:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="article-style.css">
   <style>
@@ -147,6 +147,51 @@
       <div class="subscribe-note">
         thank you for reading this far. more little stories like this are on their way.
       </div>
+
+      <!-- LIKES AND COMMENTS SECTION -->
+      <div class="interaction-section">
+        <div class="like-container">
+          <button id="like-btn" class="like-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span id="like-count" class="like-count-loading">
+              <span class="lc-dot"></span><span class="lc-dot"></span><span class="lc-dot"></span>
+            </span>
+          </button>
+        </div>
+
+        <div class="comments-section">
+          <h3>leave a thought</h3>
+          <form id="comment-form" class="comment-form">
+            <input type="text" id="comment-name" placeholder="Your name (optional)" />
+            <textarea id="comment-text" placeholder="What's on your mind?" required rows="3"></textarea>
+            <button type="submit" id="comment-submit">Post Thought</button>
+          </form>
+
+          <div class="comments-list" id="comments-list">
+            <div class="comments-loading" id="comments-loading-state">
+              <div class="comments-loading-quill">
+                <svg viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <!-- quill feather -->
+                  <path d="M44 8 C34 10, 14 28, 12 48" stroke-width="1.6" opacity="0.4"/>
+                  <path d="M44 8 C50 18, 42 34, 12 48 C20 38, 36 20, 44 8Z" fill="rgba(201,169,110,0.15)" stroke-width="1.8"/>
+                  <path d="M44 8 C38 16, 26 28, 12 48" stroke-width="1.4"/>
+                  <!-- quill tip -->
+                  <path d="M12 48 L8 52 L14 50 Z" fill="currentColor" opacity="0.7"/>
+                  <!-- little ink trail lines -->
+                  <path d="M18 44 L26 42" stroke-width="1.2" opacity="0.5"/>
+                  <path d="M16 46 L22 45" stroke-width="1.2" opacity="0.4"/>
+                </svg>
+              </div>
+              <div class="ink-dots">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <p class="comments-loading-text">gathering thoughts from the ink...</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </article>
 
     <div class="article-nav" id="bottom-nav" style="padding-top:0; display: none;">
@@ -161,7 +206,7 @@
 
   <script>
     // Constants
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxxmSNXtcymV1HAxebo-QqKrJXlzmFpIrbgCUPdi5l_AhaOFYk1iDLUqjlfHBs5JtPi/exec';
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx_Mh_3cVBgHfpdWFnYm2dVnpY307-7Rqnz6a1Any5BruWkwaD-mL5ah-quCNz_RdHm/exec';
 
     // Ambient rising particles
     const particleHost = document.getElementById('particles');
@@ -262,6 +307,10 @@
           contentEl.style.display = 'block';
           bottomNav.style.display = 'flex';
           
+          // Load interactions
+          loadInteractions(slug);
+          setupInteractionListeners(slug);
+
           // Initialize fade-in on scroll
           initializeAnimations();
         } else {
@@ -288,6 +337,129 @@
         });
       }, { threshold: 0.1 });
       els.forEach(el => io.observe(el));
+    }
+
+    async function loadInteractions(slug) {
+      // Add a timestamp so the browser doesn't cache the old zero likes/comments!
+      const cacheBuster = Date.now();
+      
+      // Load Likes
+      try {
+        const likeRes = await fetch(`${SCRIPT_URL}?action=get_likes&target=${slug}&t=${cacheBuster}`);
+        const likeData = await likeRes.json();
+        const countEl = document.getElementById('like-count');
+        // Clear loading dots and show the real number
+        countEl.classList.remove('like-count-loading');
+        countEl.textContent = likeData.likes || 0;
+      } catch (e) {
+        console.error('Error loading likes', e);
+        const countEl = document.getElementById('like-count');
+        countEl.classList.remove('like-count-loading');
+        countEl.textContent = 0;
+      }
+
+      // Load Comments
+      try {
+        const commentRes = await fetch(`${SCRIPT_URL}?action=get_comments&target=${slug}&t=${cacheBuster}`);
+        const commentData = await commentRes.json();
+        renderComments(commentData.comments || []);
+      } catch (e) { console.error('Error loading comments', e); }
+    }
+
+    function renderComments(comments) {
+      const list = document.getElementById('comments-list');
+      // Remove loading state
+      const loadingState = document.getElementById('comments-loading-state');
+      if (loadingState) loadingState.remove();
+      list.innerHTML = '';
+      if (comments.length === 0) {
+        list.innerHTML = `
+          <div style="text-align:center; padding: 32px 20px;">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:40px;height:40px;margin:0 auto 12px;display:block;opacity:0.5;">
+              <path d="M24 36 C10 27, 6 18, 12 12 C16 8, 22 10, 24 16 C26 10, 32 8, 36 12 C42 18, 38 27, 24 36Z" stroke="#d4a0a0" stroke-width="2" fill="none" stroke-linejoin="round"/>
+            </svg>
+            <p style="color:var(--ink-faint); font-family:var(--font-hand); font-size:18px; margin:0;">be the first to leave a thought ✦</p>
+          </div>`;
+        return;
+      }
+      comments.forEach(c => {
+        const item = document.createElement('div');
+        item.className = 'comment-item';
+        let displayDate = '';
+        if (c.date) {
+           try {
+             const d = new Date(c.date);
+             displayDate = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+           } catch(e) {}
+        }
+        item.innerHTML = `
+          <div class="comment-header">
+            <span class="comment-name">${c.name || 'Anonymous'}</span>
+            <span class="comment-date">${displayDate}</span>
+          </div>
+          <div class="comment-body">${c.comment.replace(/\n/g, '<br>')}</div>
+        `;
+        list.appendChild(item);
+      });
+    }
+
+    function setupInteractionListeners(slug) {
+      const likeBtn = document.getElementById('like-btn');
+      likeBtn.addEventListener('click', async () => {
+        if (likeBtn.classList.contains('liked')) return; // prevent multi-like
+        likeBtn.classList.add('liked');
+        const countEl = document.getElementById('like-count');
+        countEl.textContent = parseInt(countEl.textContent) + 1;
+        
+        try {
+          await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ action: 'add_like', target: slug })
+          });
+        } catch(e) { console.error('Like failed', e); }
+      });
+
+      const form = document.getElementById('comment-form');
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const submitBtn = document.getElementById('comment-submit');
+        submitBtn.textContent = 'Posting...';
+        submitBtn.disabled = true;
+
+        const name = document.getElementById('comment-name').value;
+        const text = document.getElementById('comment-text').value;
+
+        try {
+          await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({ action: 'add_comment', target: slug, name: name, comment: text })
+          });
+          
+          // Add to top of list visually
+          const list = document.getElementById('comments-list');
+          if (list.querySelector('p')) list.innerHTML = '';
+          const item = document.createElement('div');
+          item.className = 'comment-item';
+          item.innerHTML = `
+            <div class="comment-header">
+              <span class="comment-name">${name || 'Anonymous'}</span>
+              <span class="comment-date">Just now</span>
+            </div>
+            <div class="comment-body">${text.replace(/\n/g, '<br>')}</div>
+          `;
+          list.insertBefore(item, list.firstChild);
+          
+          form.reset();
+        } catch(e) {
+          console.error('Comment failed', e);
+          alert('Failed to post comment. Please try again later.');
+        } finally {
+          submitBtn.textContent = 'Post Thought';
+          submitBtn.disabled = false;
+        }
+      });
     }
 
     // Run content load
